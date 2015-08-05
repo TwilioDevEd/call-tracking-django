@@ -1,0 +1,11 @@
+# Coverage configuration file
+
+[run]
+source = .
+
+omit = 
+  sample_project/settings/local.py
+  sample_project/settings/production.py
+  sample_project/wsgi.py
+  */migrations/*
+  */tests.py

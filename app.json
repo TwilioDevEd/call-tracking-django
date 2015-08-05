@@ -1,0 +1,41 @@
+{
+  "name": "Call Tracking (Django)",
+  "description": "Call Tracking in Django with Twilio",
+  "repository": "https://github.com/TwilioDevEd/call-tracking-django",
+  "keywords": [
+    "phone", "twilio", "call tracking", "automation", "python", "django"
+  ],
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ],
+  "env": {
+    "TWILIO_ACCOUNT_SID": {
+      "description": "Your Twilio account secret ID, you can find at: https://www.twilio.com/user/account",
+      "value": "enter_your_account_sid_here",
+      "required": true
+    },
+    "TWILIO_AUTH_TOKEN": {
+      "description": "Your secret Twilio Auth token, you can find at: https://www.twilio.com/user/account",
+      "value": "enter_your_auth_token_here",
+      "required": true
+    },
+    "TWILIO_APPLICATION_SID": {
+      "description": "The secret ID for a Twilio Application you'll use with this app. The app will make one for you if you leave this blank.",
+      "value": "+15005550006",
+      "required": false
+    },
+    "DJANGO_SETTINGS_MODULE": {
+      "description": "Instructs our app to use the production settings module",
+      "value": "appointments.settings.production",
+      "required": true
+    },
+    "DJANGO_SECRET_KEY": {
+      "description": "A unique, unpredictable key for your Django app",
+      "generator": "secret"
+    }
+  },
+  "scripts": {
+    "postdeploy": "python manage.py migrate"
+  },
+  "success_url": "/"
+}
