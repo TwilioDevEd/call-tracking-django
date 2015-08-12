@@ -23,10 +23,8 @@ class LeadSource(models.Model):
         # on each lead source
         queryset = cls.objects.annotate(Count('lead')).order_by('name')
 
-        # Make a dict with a list of sources and a list of lead counts
-        data = {}
-        data['sources'] = list(queryset.values_list('name', flat=True))
-        data['lead_counts'] = list(queryset.values_list('lead__count', flat=True))
+        # Extract the source names and lead counts and make them a regular list
+        data = list(queryset.values('name', 'lead__count'))
 
         return data
 
@@ -52,9 +50,7 @@ class Lead(models.Model):
         # from each distinct city
         queryset = cls.objects.values('city').annotate(Count('id')).order_by('city')
 
-        # Make a dict with a list of sources and a list of lead counts
-        data = {}
-        data['cities'] = list(queryset.values_list('city', flat=True))
-        data['lead_counts'] = list(queryset.values_list('id__count', flat=True))
+        # Extract the cities and lead counts and make them a regular list
+        data = list(queryset.values('city', 'id__count'))
 
         return data

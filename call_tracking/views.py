@@ -32,16 +32,16 @@ def leads_by_source(request):
     # Invoke a LeadSource classmethod to get the data
     data = LeadSource.get_leads_per_source()
 
-    # Return it as JSON
-    return JsonResponse(data)
+    # Return it as JSON - use safe=False because we're sending a JSON array
+    return JsonResponse(data, safe=False)
 
 def leads_by_city(request):
     """Returns JSON data about the different cities leads come from"""
     # Invoke a Lead classmethod to get the data
     data = Lead.get_leads_per_city()
 
-    # Return it as JSON
-    return JsonResponse(data)
+    # Return it as JSON - use safe=False because we're sending a JSON array
+    return JsonResponse(data, safe=False)
 
 
 # Views for purchase number workflow

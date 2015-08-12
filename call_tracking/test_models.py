@@ -53,8 +53,7 @@ class LeadSourceTest(TestCase):
         data = LeadSource.get_leads_per_source()
 
         # Assert
-        self.assertEqual(data['sources'], ['Downtown billboard', 'Uptown billboard'])
-        self.assertEqual(data['lead_counts'], [1, 2])
+        self.assertEqual(data, [{'name': 'Downtown billboard', 'lead__count': 1}, {'name': 'Uptown billboard', 'lead__count': 2}])
 
 
 class LeadTest(TestCase):
@@ -101,5 +100,4 @@ class LeadTest(TestCase):
         data = Lead.get_leads_per_city()
 
         # Assert
-        self.assertEqual(data['cities'], ['San Francisco', 'Washington'])
-        self.assertEqual(data['lead_counts'], [1, 2])
+        self.assertEqual(data, [{'city': 'San Francisco', 'id__count': 1}, {'city': 'Washington', 'id__count': 2}])

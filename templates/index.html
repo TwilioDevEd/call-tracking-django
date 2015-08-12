@@ -2,6 +2,7 @@
 
 {% load bootstrap_tags %}
 {% load phone_number_filter %}
+{% load staticfiles %}
 
 {% block title %}Home{% endblock title %}
 
@@ -12,7 +13,7 @@
 
   <div class="row">
 
-    <div class="col-md-6">
+    <div class="col-md-5">
 
       <h2>Add a new number</h2>
       <p>Create a new lead source by purchasing a new phone number. Area code is optional.</p>
@@ -55,18 +56,22 @@
         </tbody>
       </table>
 
-    </div><!--/col-md-8-->
+    </div>
 
-    <div class="col-md-6">
+    <div class="col-md-7">
+      <h2>Charts</h2>
+      <p>The latest statistics about how the lead sources are performing.</p>
+
       <div class="row">
-        <div class="col-md-12">
-          <h2>Charts</h2>
-          <p>The latest statistics about how the lead sources are performing.</p>
-
+        <div class="col-md-6">
           <h3>Calls by lead source</h3>
+          <p>The number of incoming calls each lead source has received.</p>
           <canvas id="leadsBySource"></canvas>
+        </div>
 
+        <div class="col-md-6">
           <h3>Calls by city</h3>
+          <p>The number of calls from different cities, based on Twilio call data</p>
           <canvas id="leadsByCity"></canvas>
         </div>
       </div>
@@ -76,48 +81,6 @@
 {% endblock %}
 
 {% block page_js %}
-  <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
-
-  <script>
-    // Make all charts responsive
-    Chart.defaults.global.responsive = true;
-
-    // Configure the leadsBySource bar chart
-    $.get("/call-tracking/leads-by-source", function(data) {
-      var ctx = document.getElementById("leadsBySource").getContext("2d");
-      var data = {
-            labels: data.sources,
-            datasets: [
-                {
-                    label: "Leads by source",
-                    fillColor: "rgba(151,187,205,0.5)",
-                    strokeColor: "rgba(151,187,205,0.8)",
-                    highlightFill: "rgba(151,187,205,0.75)",
-                    highlightStroke: "rgba(151,187,205,1)",
-                    data: data.lead_counts
-                }
-            ]
-        };
-      var leadsBySource = new Chart(ctx).Bar(data);
-    });
-
-    // Configure the leadsByCity bar chart
-    $.get("/call-tracking/leads-by-city", function(data) {
-      var ctx = document.getElementById("leadsByCity").getContext("2d");
-      var data = {
-            labels: data.cities,
-            datasets: [
-                {
-                    label: "Leads by city",
-                    fillColor: "rgba(151,187,205,0.5)",
-                    strokeColor: "rgba(151,187,205,0.8)",
-                    highlightFill: "rgba(151,187,205,0.75)",
-                    highlightStroke: "rgba(151,187,205,1)",
-                    data: data.lead_counts
-                }
-            ]
-        };
-      var leadsByCity = new Chart(ctx).Bar(data);
-    });
-  </script>
+  <script src="{% static 'js/Chart.js' %}"></script>
+  <script src="{% static 'js/callTracking.js' %}"></script>
 {% endblock %}
