@@ -20,9 +20,9 @@
       "required": true
     },
     "TWILIO_APPLICATION_SID": {
-      "description": "The secret ID for a Twilio Application you'll use with this app. The app will make one for you if you leave this blank.",
-      "value": "",
-      "required": false
+      "description": "The secret ID for a Twilio Application you'll use with this app. Create one here: https://www.twilio.com/user/account/apps/add",
+      "value": "enter_your_twilio_application_sid_here",
+      "required": true
     },
     "DJANGO_SETTINGS_MODULE": {
       "description": "Instructs our app to use the production settings module",

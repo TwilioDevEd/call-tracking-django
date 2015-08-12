@@ -3,15 +3,29 @@
 [![Build Status](https://travis-ci.org/TwilioDevEd/call-tracking-django.svg?branch=master)](https://travis-ci.org/TwilioDevEd/call-tracking-django)
 [![Coverage Status](https://coveralls.io/repos/TwilioDevEd/call-tracking-django/badge.svg?branch=master&service=github)](https://coveralls.io/github/TwilioDevEd/call-tracking-django?branch=master)
 
-Use Twilio to track how many calls different marketing leads receive.
+Use Twilio to track the effectiveness of your different marketing campaigns. Learn how call tracking helps organizations in [these Twilio customer stories](https://www.twilio.com/use-cases/call-tracking).
 
 ## Quickstart
 
+### Create a TwiML App
+
+This project is configured to use a **TwiML App**, which allows us to easily set the voice URLs for all Twilio phone numbers we purchase in this app.
+
+Create a new TwiML app at https://www.twilio.com/user/account/apps/add and use its `Sid` as the `TWILIO_APPLICATION_SID` environment variable wherever you run this app.
+
+You can learn more about TwiML apps here: https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app
+
 ### Heroku
 
-This project is preconfigured to run on [Heroku](https://www.heroku.com/). Deploy it now:
+The easiest way to run this app is by deploying it to [Heroku](https://www.heroku.com/). You can run this app for free in minutes:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/TwilioDevEd/call-tracking-django)
+
+After your app deploys, you will need to update your TwiML app to use the Heroku server's hostname in the TwiML app's voice URL field. It will look something like this:
+
+```
+http://young-journey-3547.herokuapp.com/call-tracking/forward-call
+```
 
 ### Local development
 
@@ -61,6 +75,14 @@ To run the app locally, first clone this repository and `cd` into its directory.
     ```
     python manage.py runserver
     ```
+
+To actually forward incoming calls, your development server will need to be publicly accessible. [We recommend using ngrok to solve this problem](https://www.twilio.com/blog/2013/10/test-your-webhooks-locally-with-ngrok.html).
+
+Once you have started ngrok, update your TwiML app's voice URL setting to use your ngrok hostname, so it will look something like this:
+
+```
+http://88b37ada.ngrok.io/call-tracking/forward-call
+```
 
 ## Run the tests
 
