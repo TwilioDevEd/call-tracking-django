@@ -16,7 +16,3 @@ import dj_database_url
 DATABASES = {
     'default': dj_database_url.config()
 }
-
-
-# Address of RedisToGo instance
-BROKER_URL = os.environ.get('REDISTOGO_URL')
