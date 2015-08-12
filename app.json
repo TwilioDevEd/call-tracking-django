@@ -21,7 +21,7 @@
     },
     "TWILIO_APPLICATION_SID": {
       "description": "The secret ID for a Twilio Application you'll use with this app. The app will make one for you if you leave this blank.",
-      "value": "+15005550006",
+      "value": "",
       "required": false
     },
     "DJANGO_SETTINGS_MODULE": {
