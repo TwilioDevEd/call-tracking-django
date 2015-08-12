@@ -13,7 +13,9 @@ from django.core.wsgi import get_wsgi_application
 from whitenoise.django import DjangoWhiteNoise
 
 # Use our production settings as our default settings, which is most secure
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sample_project.settings.production")
+os.environ.setdefault(
+    "DJANGO_SETTINGS_MODULE",
+    "sample_project.settings.production")
 
 # Get a WSGI application for our project
 application = get_wsgi_application()

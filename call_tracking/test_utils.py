@@ -6,9 +6,9 @@ from .utils import search_phone_numbers, purchase_phone_number
 # Import Mock if we're running on Python 2
 import six
 
-if six.PY3: # pragma: no cover
+if six.PY3:  # pragma: no cover
     from unittest.mock import patch
-else: # pragma: no cover
+else:  # pragma: no cover
     from mock import patch
 
 

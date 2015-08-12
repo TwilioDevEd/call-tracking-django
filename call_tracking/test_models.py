@@ -33,8 +33,8 @@ class LeadSourceTest(TestCase):
             incoming_number='+15555555555')
 
         mommy.make(Lead,
-            source=lead_source_1,
-            phone_number='+16666666666')
+                   source=lead_source_1,
+                   phone_number='+16666666666')
 
         lead_source_2 = mommy.make(
             LeadSource,
@@ -42,18 +42,19 @@ class LeadSourceTest(TestCase):
             incoming_number='+17777777777')
 
         mommy.make(Lead,
-            source=lead_source_2,
-            phone_number='+18888888888')
+                   source=lead_source_2,
+                   phone_number='+18888888888')
 
         mommy.make(Lead,
-            source=lead_source_2,
-            phone_number='+19999999999')
+                   source=lead_source_2,
+                   phone_number='+19999999999')
 
         # Act
         data = LeadSource.get_leads_per_source()
 
         # Assert
-        self.assertEqual(data, [{'name': 'Downtown billboard', 'lead__count': 1}, {'name': 'Uptown billboard', 'lead__count': 2}])
+        self.assertEqual(data, [{'name': 'Downtown billboard', 'lead__count': 1}, {
+                         'name': 'Uptown billboard', 'lead__count': 2}])
 
 
 class LeadTest(TestCase):
@@ -82,22 +83,23 @@ class LeadTest(TestCase):
             incoming_number='+15555555555')
 
         mommy.make(Lead,
-            source=lead_source,
-            phone_number='+16666666666',
-            city='Washington')
+                   source=lead_source,
+                   phone_number='+16666666666',
+                   city='Washington')
 
         mommy.make(Lead,
-            source=lead_source,
-            phone_number='+17777777777',
-            city='Washington')
+                   source=lead_source,
+                   phone_number='+17777777777',
+                   city='Washington')
 
         mommy.make(Lead,
-            source=lead_source,
-            phone_number='+18888888888',
-            city='San Francisco')
+                   source=lead_source,
+                   phone_number='+18888888888',
+                   city='San Francisco')
 
         # Act
         data = Lead.get_leads_per_city()
 
         # Assert
-        self.assertEqual(data, [{'city': 'San Francisco', 'id__count': 1}, {'city': 'Washington', 'id__count': 2}])
+        self.assertEqual(data, [{'city': 'San Francisco', 'id__count': 1}, {
+                         'city': 'Washington', 'id__count': 2}])

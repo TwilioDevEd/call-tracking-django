@@ -4,6 +4,7 @@ import phonenumbers
 
 register = template.Library()
 
+
 @register.filter
 def national_format(value):
     """Displays a phone number in an appropriate national format"""

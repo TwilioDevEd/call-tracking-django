@@ -9,9 +9,9 @@ from .templatetags.phone_number_filter import national_format
 # Import Mock if we're running on Python 2
 import six
 
-if six.PY3: # pragma: no cover
+if six.PY3:  # pragma: no cover
     from unittest.mock import patch, Mock, DEFAULT
-else: # pragma: no cover
+else:  # pragma: no cover
     from mock import patch, Mock, DEFAULT
 
 
@@ -58,6 +58,7 @@ class HomePageTest(TestCase):
         self.assertEqual(response['content-type'], 'application/json')
         self.assertEqual(response.content, b'{"foo": "bar"}')
 
+
 class ListNumbersTest(TestCase):
 
     def setUp(self):
@@ -81,14 +82,16 @@ class ListNumbersTest(TestCase):
 
         # Act
         with patch('call_tracking.views.search_phone_numbers', return_value=mock_numbers) as mock:
-            response = self.client.post('/call-tracking/list-numbers', {'area_code': '703'})
+            response = self.client.post(
+                '/call-tracking/list-numbers', {'area_code': '703'})
 
         # Assert
         self.assertRedirects(response, '/')
 
     def test_list_numbers_invalid_input(self):
         # Act
-        response = self.client.post('/call-tracking/list-numbers', {'area_code': '1234'})
+        response = self.client.post(
+            '/call-tracking/list-numbers', {'area_code': '1234'})
 
         # Assert
         self.assertEqual(response.status_code, 302)
@@ -102,11 +105,13 @@ class PurchaseNumberTest(TestCase):
 
     def test_purchase_number_valid_input(self):
         # Arrange
-        mock_twilio_number = Mock(phone_number='+14158020512') # have to use a real number to get past the form validation
+        # have to use a real number to get past the form validation
+        mock_twilio_number = Mock(phone_number='+14158020512')
 
         # Act
         with patch('call_tracking.views.purchase_phone_number', return_value=mock_twilio_number):
-            response = self.client.post('/call-tracking/purchase-number', {'phone_number': '+14158020512'})
+            response = self.client.post(
+                '/call-tracking/purchase-number', {'phone_number': '+14158020512'})
 
         # Assert
         self.assertEqual(response.status_code, 302)
@@ -114,12 +119,14 @@ class PurchaseNumberTest(TestCase):
 
     def test_purchase_number_bad_post_data(self):
         # Act
-        response = self.client.post('/call-tracking/purchase-number', {'phone_number': 'bad-phone-number'}, follow=True)
+        response = self.client.post(
+            '/call-tracking/purchase-number', {'phone_number': 'bad-phone-number'}, follow=True)
 
         # Assert
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.redirect_chain[0][0], 'http://testserver/')
-        self.assertIn('bad-phone-number is not a valid phone number. Please search again.', str(response.content))
+        self.assertIn(
+            'bad-phone-number is not a valid phone number. Please search again.', str(response.content))
 
 
 class ForwardCallTest(TestCase):

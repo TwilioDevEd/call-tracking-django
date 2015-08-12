@@ -6,9 +6,14 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 @python_2_unicode_compatible
 class LeadSource(models.Model):
-    name = models.CharField(max_length=100, blank=True, help_text='E.g. "Downtown billboard"')
+    name = models.CharField(
+        max_length=100,
+        blank=True,
+        help_text='E.g. "Downtown billboard"')
     incoming_number = PhoneNumberField(unique=True)
-    forwarding_number = PhoneNumberField(blank=True, help_text='People who call this lead source will be connected with this phone number. Must include international prefix - e.g. +1 555 555 55555')
+    forwarding_number = PhoneNumberField(
+        blank=True,
+        help_text='People who call this lead source will be connected with this phone number. Must include international prefix - e.g. +1 555 555 55555')
 
     def __str__(self):
         if self.name:
@@ -48,7 +53,8 @@ class Lead(models.Model):
         """Get the number of leads for each city"""
         # Use Django's annotate feature to include the number of leads
         # from each distinct city
-        queryset = cls.objects.values('city').annotate(Count('id')).order_by('city')
+        queryset = cls.objects.values('city').annotate(
+            Count('id')).order_by('city')
 
         # Extract the cities and lead counts and make them a regular list
         data = list(queryset.values('city', 'id__count'))

@@ -11,7 +11,9 @@ urlpatterns = [
     url(r'^/forward-call$', forward_call, name='forward_call'),
 
     # Lead Source edit and delete views
-    url(r'^/(?P<pk>[0-9]+)/edit$', LeadSourceUpdateView.as_view(), name='edit_lead_source'),
+    url(r'^/(?P<pk>[0-9]+)/edit$',
+        LeadSourceUpdateView.as_view(),
+        name='edit_lead_source'),
 
     # JSON URLs for the bar chart data
     url(r'^/leads-by-source$', leads_by_source, name='leads_by_source'),

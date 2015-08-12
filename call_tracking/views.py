@@ -27,6 +27,7 @@ def home(request):
 
     return render(request, 'index.html', context)
 
+
 def leads_by_source(request):
     """Returns JSON data about the lead sources and how many leads they have"""
     # Invoke a LeadSource classmethod to get the data
@@ -34,6 +35,7 @@ def leads_by_source(request):
 
     # Return it as JSON - use safe=False because we're sending a JSON array
     return JsonResponse(data, safe=False)
+
 
 def leads_by_city(request):
     """Returns JSON data about the different cities leads come from"""
@@ -57,7 +59,9 @@ def list_numbers(request):
 
         # Check if there are no numbers available in this area code
         if not available_numbers:
-            messages.error(request, 'There are no Twilio numbers available for area code {0}. Search for numbers in a different area code.'.format(area_code))
+            messages.error(
+                request,
+                'There are no Twilio numbers available for area code {0}. Search for numbers in a different area code.'.format(area_code))
             return redirect('home')
 
         context = {}
@@ -68,9 +72,10 @@ def list_numbers(request):
         # Our area code was invalid - flash a message and redirect back home
         bad_area_code = form.data['area_code']
         messages.error(request, '{0} is not a valid area code. Please search again.'
-            .format(bad_area_code))
+                       .format(bad_area_code))
 
         return redirect('home')
+
 
 def purchase_number(request):
     """Purchases a new phone number using the Twilio API"""
@@ -85,7 +90,10 @@ def purchase_number(request):
         lead_source = LeadSource(incoming_number=twilio_number.phone_number)
         lead_source.save()
 
-        messages.success(request, 'Phone number {0} has been purchased. Please add a name for this lead source.'.format(twilio_number.friendly_name))
+        messages.success(
+            request,
+            'Phone number {0} has been purchased. Please add a name for this lead source.'.format(
+                twilio_number.friendly_name))
 
         # Redirect to edit lead page
         return redirect('edit_lead_source', pk=lead_source.pk)
@@ -93,9 +101,10 @@ def purchase_number(request):
         # In the unlikely event of an error, redirect to the home page
         bad_phone_number = form.data['phone_number']
         messages.error(request, '{0} is not a valid phone number. Please search again.'
-            .format(bad_phone_number))
+                       .format(bad_phone_number))
 
         return redirect('home')
+
 
 class LeadSourceUpdateView(SuccessMessageMixin, UpdateView):
     """Powers a form to edit Lead Sources"""

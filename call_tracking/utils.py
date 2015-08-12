@@ -7,6 +7,7 @@ import os
 # environment variables
 client = TwilioRestClient()
 
+
 def search_phone_numbers(area_code=None):
     """Queries the Twilio REST API to get phone numbers available for puchase"""
     # You can change the country argument to search outside the US
@@ -14,6 +15,7 @@ def search_phone_numbers(area_code=None):
 
     # Returns 30 by default - let's trim the list for UX purposes
     return numbers[:10]
+
 
 def purchase_phone_number(phone_number):
     """Purchases a new phone number from the Twilio API"""
