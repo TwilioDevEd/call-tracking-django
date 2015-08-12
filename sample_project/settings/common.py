@@ -1,5 +1,5 @@
 """
-Common Django settings for the appointments project.
+Common Django settings for the project.
 
 See the local, test, and production settings modules for the values used
 in each environment.
@@ -105,10 +105,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
 
 STATIC_ROOT = BASE_DIR + '/staticfiles'
 
