@@ -25,27 +25,3 @@
     </div>
   </div>
 {% endblock %}
-
-{% comment %}Set up intl-tel-input JS library{% endcomment %}
-{% block page_css %}
-  <link rel="stylesheet" href="{% static 'css/intlTelInput.css' %}">
-  <style>
-    .iti-flag {background-image: url("{% static 'img/flags.png' %}");}
-  </style>
-{% endblock %}
-
-{% block page_js %}
-  <script src="{% static 'js/intlTelInput.js' %}"></script>
-  <script>
-    $("#id_forwarding_number").intlTelInput({
-        responsiveDropdown: true,
-        autoFormat: true,
-        utilsScript: "{% static 'js/utils.js' %}"
-    });
-
-    $("form").submit(function() {
-      var nationalNumber = $("#id_forwarding_number");
-      nationalNumber.val(nationalNumber.intlTelInput("getNumber"));
-    });
-  </script>
-{% endblock %}

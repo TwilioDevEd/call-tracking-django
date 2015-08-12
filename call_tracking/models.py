@@ -8,7 +8,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 class LeadSource(models.Model):
     name = models.CharField(max_length=100, blank=True, help_text='E.g. "Downtown billboard"')
     incoming_number = PhoneNumberField(unique=True)
-    forwarding_number = PhoneNumberField(blank=True, help_text='People who call this lead source will be connected with this phone number')
+    forwarding_number = PhoneNumberField(blank=True, help_text='People who call this lead source will be connected with this phone number. Must include international prefix - e.g. +1 555 555 55555')
 
     def __str__(self):
         if self.name:
