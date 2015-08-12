@@ -103,32 +103,14 @@ class PurchaseNumberTest(TestCase):
     def test_purchase_number_valid_input(self):
         # Arrange
         mock_twilio_number = Mock(phone_number='+14158020512') # have to use a real number to get past the form validation
-        purchase_method_mock = Mock(return_value=mock_twilio_number)
 
         # Act
-        with patch.multiple('call_tracking.views', get_twilio_application=DEFAULT, purchase_phone_number=purchase_method_mock):
+        with patch('call_tracking.views.purchase_phone_number', return_value=mock_twilio_number):
             response = self.client.post('/call-tracking/purchase-number', {'phone_number': '+14158020512'})
 
         # Assert
         self.assertEqual(response.status_code, 302)
         self.assertIn('/edit', response.url)
-
-    def test_purchase_number_unconfigured_twilio_app(self):
-        # Arrange
-        mock_twilio_number = Mock(phone_number='+14158020512') # have to use a real number to get past the form validation
-        purchase_method_mock = Mock(return_value=mock_twilio_number)
-
-        mock_twilio_app = Mock(sid='foo', voice_url='http://www.example.com/call-tracking/forward-call')
-        get_twilio_app_mock = Mock(return_value=mock_twilio_app)
-
-        # Act
-        with patch.multiple('call_tracking.views', get_twilio_application=get_twilio_app_mock, purchase_phone_number=purchase_method_mock):
-            response = self.client.post('/call-tracking/purchase-number', {'phone_number': '+14158020512'}, follow=True)
-
-        # Assert
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('/edit', response.redirect_chain[0][0])
-        self.assertIn('https://www.twilio.com/user/account/apps/foo', str(response.content))
 
     def test_purchase_number_bad_post_data(self):
         # Act

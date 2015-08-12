@@ -11,7 +11,7 @@ from twilio import twiml
 
 from .forms import AreaCodeForm, PurchaseNumberForm
 from .models import LeadSource, Lead
-from .utils import search_phone_numbers, purchase_phone_number, get_twilio_application
+from .utils import search_phone_numbers, purchase_phone_number
 
 
 # Home page view and JSON views to power the charts
@@ -77,24 +77,15 @@ def purchase_number(request):
     form = PurchaseNumberForm(request.POST)
 
     if form.is_valid():
-        # We received a valid phone number - before we purchase it, get the
-        # Twilio Application SID so all our numbers have the same voice URL
-        application = get_twilio_application()
-
         # Purchase the phone number
         phone_number = form.cleaned_data['phone_number']
-        twilio_number = purchase_phone_number(phone_number.as_e164, application.sid)
+        twilio_number = purchase_phone_number(phone_number.as_e164)
 
         # Save it in a new LeadSource object
         lead_source = LeadSource(incoming_number=twilio_number.phone_number)
         lead_source.save()
 
         messages.success(request, 'Phone number {0} has been purchased. Please add a name for this lead source.'.format(twilio_number.friendly_name))
-
-        # Display a warning message if the Twilio Application is still using
-        # example.com in its voice URL
-        if 'example.com' in application.voice_url:
-            messages.warning(request, 'WARNING: You <b>must</b> update the Twilio Application\'s voice URL before this number will forward calls. You can do that here: <a href="https://www.twilio.com/user/account/apps/{0}" target="_blank">https://www.twilio.com/user/account/apps/{0}</a>.'.format(application.sid))
 
         # Redirect to edit lead page
         return redirect('edit_lead_source', pk=lead_source.pk)
