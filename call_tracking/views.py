@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView
@@ -15,20 +15,17 @@ from .utils import search_phone_numbers, purchase_phone_number, get_twilio_appli
 
 
 # Home page view and JSON views to power the charts
-class HomePageView(TemplateView):
-    """Renders the home page template with some additional context"""
+def home(request):
+    """Renders the home page"""
+    context = {}
 
-    template_name = "index.html"
+    # Add the area code form - default to 415
+    context['form'] = AreaCodeForm({'area_code': '415'})
 
-    def get_context_data(self, **kwargs):
-        context = super(HomePageView, self).get_context_data(**kwargs)
+    # Add the list of lead sources
+    context['lead_sources'] = LeadSource.objects.all()
 
-        # Add the area code form - default to 415
-        context['form'] = AreaCodeForm({'area_code': '415'})
-
-        # Add the list of lead sources
-        context['lead_sources'] = LeadSource.objects.all()
-        return context
+    return render(request, 'index.html', context)
 
 def leads_by_source(request):
     """Returns JSON data about the lead sources and how many leads they have"""
@@ -64,10 +61,9 @@ def list_numbers(request):
             return redirect('home')
 
         context = {}
-        context.update(csrf(request))
         context['available_numbers'] = available_numbers
 
-        return render_to_response('call_tracking/list_numbers.html', context)
+        return render(request, 'call_tracking/list_numbers.html', context)
     else:
         # Our area code was invalid - flash a message and redirect back home
         bad_area_code = form.data['area_code']
