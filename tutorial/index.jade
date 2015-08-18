@@ -1,0 +1,100 @@
+.chapter(data-title='Call Tracking with Twilio and Django')
+  .step(data-file='call_tracking/views.py', data-highlight='118-138')
+    :markdown
+      ## What does this thing do?
+
+      - Brief overview of app
+      - Links to README
+      - Possibly includes screenshot
+
+  .step(data-file='call_tracking/utils.py', data-highlight='1-17')
+    :markdown
+      ## Retrieving available phone numbers
+
+      - Discuss instantiation of Twilio client (using environment variables from `.env_example`)
+      - Explain that `client.phone_numbers.search` returns a list of numbers
+        that meet our criteria
+      - Transition to next step about `list_numbers` view
+
+  .step(data-file='call_tracking/views.py', data-highlight='49-77')
+    :markdown
+      ## List phone numbers view
+
+      - Discuss use of `AreaCodeForm` to sanitize input
+      - Explain use of `search_phone_numbers` util function
+      - Explain redirect if there are no available numbers
+      - Transition to next step about `purchase_phone_number` util function
+
+  .step(data-file='call_tracking/utils.py')
+    :markdown
+      ## Purchasing a phone number
+
+      - Discuss parameters of `client.phone_numbers.purchase`
+      - Discuss use of `voice_application_sid` parameter
+        - Also explain the need to create a TwiML application (maybe with a Camtasia GIF screencast) and why it’s beneficial
+      - Transition to next step about the `purchase_number` view
+
+  .step(data-file='call_tracking/views.py', data-highlight='80-106')
+    :markdown
+      ## Purchase phone number view
+
+      - Discuss use of `PurchaseNumberForm` to sanitize input
+        - And how we're using the django-phonenumber-field library for the form field, which is why we use the `.as_e164` property
+      - Explain use of `purchase_phone_number` util function
+      - Explain creation of a `LeadSource` model after purchase
+      - Explain redirect to edit view after purchase
+
+  .step(data-file='call_tracking/models.py', data-highlight='1-22')
+    :markdown
+      ## The LeadSource model
+
+      - Explain that our model has just enough fields to associate an incoming call with a forwarding number
+      - Again highlight use of django-phonenumber-field - this time for a model field
+      - One sentence about why `@python_2_unicode_compatible` decorator is necessary
+      - Transition to `Lead` model
+
+  .step(data-file='call_tracking/models.py', data-highlight='37-49')
+    :markdown
+      ## The Lead model
+
+      - Explain the many-to-one relationship between Leads and LeadSources
+      - Point out that `city` and `state` are just a couple of the fields
+        a developer could choose to record about each call
+      - Transition to `forward_call` view, where `Lead`s are created
+
+  .step(data-file='call_tracking/views.py', data-highlight='118-138')
+    :markdown
+      ## Forwarding calls and creating leads
+
+      - Explain use of Twilio API's `Called` POST data element to determine the `LeadSource` for an incoming call
+      - Explain creating a new `Lead` from other elements in the POST data
+      - Explain using the `<dial>` verb to create the response that connects the call to the `fowarding_number`
+
+
+  .step(data-file='call_tracking/models.py', data-highlight='1-34')
+    :markdown
+      ## Getting statistics about our lead sources
+
+      - A brief sentence about why these stats might be useful
+      - Explain use of Django's annotation feature (and `.values() method) to get these stats
+      - Explain why this is a `classmethod` instead of a regular model method
+      - Transition to Chart.js step
+
+  .step(data-file='call_tracking/static/js/callTracking.js')
+    :markdown
+      ## Visualizing our statistics with Chart.js
+
+      - Explain choice of Chart.js library for this tutorial (simplicity)
+      - Allude to JSON views which provide this data using the methods covered in the previous step
+      - Explain data munging to get data in right format for Chart.js
+      - Include screenshot of what populated charts look like
+
+  .step(data-file='call_tracking/views.py', data-highlight='118-138')
+    :markdown
+      ## Where to next?
+
+      - Wrap up text
+      - Link to other tutorials:
+        - Click to call
+        - Appointment Reminders
+      - Email us with feedback
