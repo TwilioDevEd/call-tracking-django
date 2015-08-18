@@ -37,5 +37,8 @@
   "scripts": {
     "postdeploy": "python manage.py migrate"
   },
+  "website": "https://github.com/TwilioDevEd/call-tracking-django",
+  "repository": "https://github.com/TwilioDevEd/call-tracking-django",
+  "logo": "https://s3.amazonaws.com/howtodocs/twilio-logo.png",
   "success_url": "/"
 }

@@ -56,6 +56,7 @@ To run the app locally, first clone this repository and `cd` into its directory.
 1. Start a local PostgreSQL database and create a database called `call_tracking`:
     - If on a Mac, I recommend [Postgres.app](http://postgresapp.com/). After install, open psql and run `CREATE DATABASE call_tracking;`
     - If Postgres is already installed locally, you can just run `createdb call_tracking` from a terminal
+
 1. Run the migrations with:
 
     ```
@@ -86,7 +87,7 @@ http://88b37ada.ngrok.io/call-tracking/forward-call
 
 ## Run the tests
 
-You can run the tests locally through [coverage](http://coverage.readthedocs.org/en/coverage-3.7.1/#):
+You can run the tests locally through [coverage](http://coverage.readthedocs.org/):
 
 ```
 $ coverage run manage.py test --settings=sample_project.settings.test
