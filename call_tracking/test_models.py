@@ -50,7 +50,7 @@ class LeadSourceTest(TestCase):
                    phone_number='+19999999999')
 
         # Act
-        data = LeadSource.get_leads_per_source()
+        data = LeadSource.objects.get_leads_per_source()
 
         # Assert
         self.assertEqual(data, [{'name': 'Downtown billboard', 'lead__count': 1}, {
@@ -98,7 +98,7 @@ class LeadTest(TestCase):
                    city='San Francisco')
 
         # Act
-        data = Lead.get_leads_per_city()
+        data = Lead.objects.get_leads_per_city()
 
         # Assert
         self.assertEqual(data, [{'city': 'San Francisco', 'id__count': 1}, {
