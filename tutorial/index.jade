@@ -3,18 +3,34 @@
     :markdown
       ## What does this thing do?
 
-      - Brief overview of app
+      - Brief overview of app [Django](http://djangoproject.com/)
       - Links to README
       - Possibly includes screenshot
 
+      ---
+
+      **See also:**
+
+      * [Twilio Python Helper Library](https://github.com/twilio/twilio-python/)
+      * [Twilio REST API docs](https://www.twilio.com/docs/api)
+      * [Django docs](https://docs.djangoproject.com/en/1.8/)
+
   .step(data-file='call_tracking/utils.py', data-highlight='1-17')
     :markdown
-      ## Retrieving available phone numbers
+      ## Retrieve available phone numbers
 
       - Discuss instantiation of Twilio client (using environment variables from `.env_example`)
       - Explain that `client.phone_numbers.search` returns a list of numbers
         that meet our criteria
       - Transition to next step about `list_numbers` view
+
+      ---
+
+      **See also:**
+
+      * [Accessing REST resources with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/basics.html)
+      * [Searching and Buying a Number with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/phone-numbers.html#searching-and-buying-a-number)
+      * [Twilio REST API: Available Phone Numbers](https://www.twilio.com/docs/api/rest/available-phone-numbers)
 
   .step(data-file='call_tracking/views.py', data-highlight='49-77')
     :markdown
@@ -25,14 +41,29 @@
       - Explain redirect if there are no available numbers
       - Transition to next step about `purchase_phone_number` util function
 
+      ---
+
+      **See also:**
+
+      * [Django forms overview](https://docs.djangoproject.com/en/1.8/topics/forms/)
+      * [Django messages framework](https://docs.djangoproject.com/en/1.8/ref/contrib/messages/)
+
   .step(data-file='call_tracking/utils.py')
     :markdown
-      ## Purchasing a phone number
+      ## Purchase a phone number
 
       - Discuss parameters of `client.phone_numbers.purchase`
       - Discuss use of `voice_application_sid` parameter
         - Also explain the need to create a TwiML application (maybe with a Camtasia GIF screencast) and why it’s beneficial
       - Transition to next step about the `purchase_number` view
+
+      ---
+
+      **See also:**
+
+      * [Create a TwiML app](https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app)
+      * [Searching and Buying a Number with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/phone-numbers.html#searching-and-buying-a-number)
+      * [Twilio REST API: Available Phone Numbers](https://www.twilio.com/docs/api/rest/available-phone-numbers)
 
   .step(data-file='call_tracking/views.py', data-highlight='80-106')
     :markdown
@@ -44,6 +75,14 @@
       - Explain creation of a `LeadSource` model after purchase
       - Explain redirect to edit view after purchase
 
+      ---
+
+      **See also:**
+
+      * [Django forms overview](https://docs.djangoproject.com/en/1.8/topics/forms/)
+      * [Django messages framework](https://docs.djangoproject.com/en/1.8/ref/contrib/messages/)
+      * [Django redirect shortcut](https://docs.djangoproject.com/en/1.8/topics/http/shortcuts/#redirect)
+
   .step(data-file='call_tracking/models.py', data-highlight='1-22')
     :markdown
       ## The LeadSource model
@@ -52,6 +91,13 @@
       - Again highlight use of django-phonenumber-field - this time for a model field
       - One sentence about why `@python_2_unicode_compatible` decorator is necessary
       - Transition to `Lead` model
+
+      ---
+
+      **See also:**
+
+      * [Django Models](https://docs.djangoproject.com/en/1.8/topics/db/models/)
+      * [Django @python_2_unicode_compatible decorator](https://docs.djangoproject.com/en/1.8/topics/python3/#str-and-unicode-methods)
 
   .step(data-file='call_tracking/models.py', data-highlight='37-49')
     :markdown
@@ -62,32 +108,63 @@
         a developer could choose to record about each call
       - Transition to `forward_call` view, where `Lead`s are created
 
+      ---
+
+      **See also:**
+
+      * [Twilio voice request parameters](https://www.twilio.com/docs/api/twiml/twilio_request)
+      * [Django ForeignKey relationships](https://docs.djangoproject.com/en/1.8/topics/db/examples/many_to_one/)
+
   .step(data-file='call_tracking/views.py', data-highlight='118-138')
     :markdown
-      ## Forwarding calls and creating leads
+      ## Forward calls and create Leads
 
       - Explain use of Twilio API's `Called` POST data element to determine the `LeadSource` for an incoming call
       - Explain creating a new `Lead` from other elements in the POST data
       - Explain using the `<dial>` verb to create the response that connects the call to the `fowarding_number`
 
+      ---
+
+      **See also:**
+
+      * [Twilio voice request parameters](https://www.twilio.com/docs/api/twiml/twilio_request)
+      * [@csrf_exempt decorator](https://docs.djangoproject.com/en/1.8/ref/csrf/#edge-cases)
+      * [TwiML creation with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/twiml.html)
+      * [TwiML <Dial> verb](https://www.twilio.com/docs/api/twiml/dial)
 
   .step(data-file='call_tracking/models.py', data-highlight='1-34')
     :markdown
-      ## Getting statistics about our lead sources
+      ## Get statistics about our Lead Sources
 
       - A brief sentence about why these stats might be useful
       - Explain use of Django's annotation feature (and `.values() method) to get these stats
       - Explain why this is a `classmethod` instead of a regular model method
       - Transition to Chart.js step
 
+      ---
+
+      **See also:**
+
+      * [Django custom model managers](https://docs.djangoproject.com/en/1.8/topics/db/managers/)
+      * [Django annotate feature](https://docs.djangoproject.com/en/1.8/topics/db/aggregation/#generating-aggregates-for-each-item-in-a-queryset)
+      * [Django queryset values() method](https://docs.djangoproject.com/en/1.8/ref/models/querysets/#values)
+
   .step(data-file='call_tracking/static/js/callTracking.js')
     :markdown
-      ## Visualizing our statistics with Chart.js
+      ## Visualize our statistics with Chart.js
 
       - Explain choice of Chart.js library for this tutorial (simplicity)
       - Allude to JSON views which provide this data using the methods covered in the previous step
       - Explain data munging to get data in right format for Chart.js
       - Include screenshot of what populated charts look like
+
+
+      ---
+
+      **See also:**
+
+      * [Chart.js pie charts](http://www.chartjs.org/docs/#doughnut-pie-chart)
+      * [jQuery $.get() method](https://api.jquery.com/jquery.get/)
 
   .step(data-file='call_tracking/views.py', data-highlight='118-138')
     :markdown
@@ -95,6 +172,6 @@
 
       - Wrap up text
       - Link to other tutorials:
-        - Click to call
-        - Appointment Reminders
-      - Email us with feedback
+        - Click to call - https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask
+        - Appointment Reminders - https://www.twilio.com/docs/howto/walkthrough/appointment-reminders/python/django
+      - Email us with feedback - devedoss@twilio.com
