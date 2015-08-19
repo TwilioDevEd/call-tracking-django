@@ -37,7 +37,7 @@ class HomePageTest(TestCase):
         mock_data = {'foo': 'bar'}
 
         # Act
-        with patch('call_tracking.models.LeadSource.get_leads_per_source', return_value=mock_data):
+        with patch('call_tracking.models.LeadSource.objects.get_leads_per_source', return_value=mock_data):
             response = self.client.get('/call-tracking/leads-by-source')
 
         # Assert
@@ -50,7 +50,7 @@ class HomePageTest(TestCase):
         mock_data = {'foo': 'bar'}
 
         # Act
-        with patch('call_tracking.models.Lead.get_leads_per_city', return_value=mock_data):
+        with patch('call_tracking.models.Lead.objects.get_leads_per_city', return_value=mock_data):
             response = self.client.get('/call-tracking/leads-by-city')
 
         # Assert
