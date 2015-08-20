@@ -10,25 +10,41 @@
   height:100%;
   width:100%;
 }</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="Call Tracking"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">Call Tracking</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Use Twilio to track the effectiveness of your different marketing campaigns. Let's get started!</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="Call Tracking with Twilio and Django" class="chapter"><div data-file="call_tracking/views.py" data-highlight="118-138" class="step"><h2 id="what-does-this-thing-do-">What does this thing do?</h2>
+<p>This <a href="http://djangoproject.com/">Django</a> web application shows how you can
+use Twilio to track the effectiveness of different marketing channels.</p>
+<p>This application has three main features:</p>
 <ul>
-<li>Brief overview of app <a href="http://djangoproject.com/">Django</a></li>
-<li>Links to README</li>
-<li>Possibly includes screenshot</li>
+<li>It purchases phone numbers from Twilio to use in different marketing
+campaigns (like a billboard or a bus advertisement)</li>
+<li>It forwards incoming calls for those phone numbers to a salesperson</li>
+<li>It displays charts showing data about the phone numbers and the calls
+they receive</li>
 </ul>
+<p>In this tutorial, we&#39;ll point out the key bits of code that make this
+application work.
+<a href="https://github.com/twiliodeved/call-tracking-django">Check out the project README on GitHub</a>
+to see how to run the code yourself.</p>
+<p>Let&#39;s get started! Click the right arrow above to advance to the next
+code snippet.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
 <li><a href="https://github.com/twilio/twilio-python/">Twilio Python Helper Library</a></li>
 <li><a href="https://www.twilio.com/docs/api">Twilio REST API docs</a></li>
 <li><a href="https://docs.djangoproject.com/en/1.8/">Django docs</a></li>
+<li><a href="http://www.searchenginejournal.com/seo-beginner-guide-call-tracking-care/83173/">What is Call Tracking?</a></li>
 </ul>
-</div><div data-file="call_tracking/utils.py" data-highlight="1-17" class="step"><h2 id="retrieve-available-phone-numbers">Retrieve available phone numbers</h2>
-<ul>
-<li>Discuss instantiation of Twilio client (using environment variables from <code>.env_example</code>)</li>
-<li>Explain that <code>client.phone_numbers.search</code> returns a list of numbers
-that meet our criteria</li>
-<li>Transition to next step about <code>list_numbers</code> view</li>
-</ul>
+</div><div data-file="call_tracking/utils.py" data-highlight="1-17" class="step"><h2 id="search-for-available-phone-numbers">Search for available phone numbers</h2>
+<p>Before users can do anything with our app, they have to find an available
+Twilio phone number to purchase. We can search for a number using the
+Twilio REST API.</p>
+<p>Using the twilio-python helper library, we first create a <code>TwilioRestClient</code>
+in a <code>utils.py</code> module. <code>TwilioRestClient</code> looks for environment variables
+to find its credentials.</p>
+<p>Once we&#39;ve got our <code>client</code> ready, searching for available phone numbers
+is as easy as <code>phone_numbers.search()</code>. Twilio will return a list
+of phone numbers for our user to choose from.</p>
+<p>Let&#39;s look at the Django view which calls this code next.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
@@ -37,12 +53,14 @@ that meet our criteria</li>
 <li><a href="https://www.twilio.com/docs/api/rest/available-phone-numbers">Twilio REST API: Available Phone Numbers</a></li>
 </ul>
 </div><div data-file="call_tracking/views.py" data-highlight="49-77" class="step"><h2 id="list-phone-numbers-view">List phone numbers view</h2>
-<ul>
-<li>Discuss use of <code>AreaCodeForm</code> to sanitize input</li>
-<li>Explain use of <code>search_phone_numbers</code> util function</li>
-<li>Explain redirect if there are no available numbers</li>
-<li>Transition to next step about <code>purchase_phone_number</code> util function</li>
-</ul>
+<p>When searching for a phone number, our users can optionally specify an
+area code. Our <code>list_numbers</code> view starts off validating that input with
+a one-field form called <code>AreaCodeForm</code>.</p>
+<p>We then call our <code>search_phone_numbers</code> function from the previous step
+to retrieve a list of available numbers. If that list comes back empty
+we redirect the user back home and tell them to try a different area code.</p>
+<p>Otherwise we use those numbers to render the <code>list_numbers.html</code> template,
+which is where our users will choose which number they want to purchase.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
@@ -50,70 +68,91 @@ that meet our criteria</li>
 <li><a href="https://docs.djangoproject.com/en/1.8/ref/contrib/messages/">Django messages framework</a></li>
 </ul>
 </div><div data-file="call_tracking/utils.py" class="step"><h2 id="purchase-a-phone-number">Purchase a phone number</h2>
-<ul>
-<li>Discuss parameters of <code>client.phone_numbers.purchase</code></li>
-<li>Discuss use of <code>voice_application_sid</code> parameter<ul>
-<li>Also explain the need to create a TwiML application (maybe with a Camtasia GIF screencast) and why it’s beneficial</li>
-</ul>
-</li>
-<li>Transition to next step about the <code>purchase_number</code> view</li>
-</ul>
+<p>Our <code>purchase_phone_number</code> utility function takes a phone number as its
+sole parameter and uses our Twilio API client to make the purchase.</p>
+<p>We also pass an extra argument to our <code>phone_numbers.purchase()</code> call for
+<code>voice_application_sid</code>. This lets us configure the new number to use
+a TwiML app for its Voice URL.</p>
+<p>TwiML apps let us apply the same URL configuration across all numbers we
+purchase. They&#39;re really handy for applications like ours, where we want
+calls to each of our numbers to use the same Voice URL on our server.</p>
+<p>To run our application yourself, you&#39;ll need to <a href="https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app">create your own TwiML app
+first</a>.</p>
+<p>We&#39;ll look at the view which calls this function next.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
-<li><a href="https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app">Create a TwiML app</a></li>
 <li><a href="https://twilio-python.readthedocs.org/en/latest/usage/phone-numbers.html#searching-and-buying-a-number">Searching and Buying a Number with twilio-python</a></li>
 <li><a href="https://www.twilio.com/docs/api/rest/available-phone-numbers">Twilio REST API: Available Phone Numbers</a></li>
 </ul>
 </div><div data-file="call_tracking/views.py" data-highlight="80-106" class="step"><h2 id="purchase-phone-number-view">Purchase phone number view</h2>
-<ul>
-<li>Discuss use of <code>PurchaseNumberForm</code> to sanitize input<ul>
-<li>And how we&#39;re using the django-phonenumber-field library for the form field, which is why we use the <code>.as_e164</code> property</li>
-</ul>
-</li>
-<li>Explain use of <code>purchase_phone_number</code> util function</li>
-<li>Explain creation of a <code>LeadSource</code> model after purchase</li>
-<li>Explain redirect to edit view after purchase</li>
-</ul>
+<p>Our <code>purchase_number</code> view starts off sanitizing our POST data again, this
+time using a form called <code>PurchaseNumberForm</code>.</p>
+<p>The <code>phone_number</code> field on that form is a third-party field from the
+<a href="https://github.com/stefanfoulis/django-phonenumber-field">django-phonenumber-field</a>
+library. Our purchase function expects its phone number
+argument to look like <code>+155555555555</code>, so we need to use the form field&#39;s
+<code>.as_e164</code> property to get the right format.</p>
+<p>After the number has been purchased, we save it in a new instance of our
+<code>LeadSource</code> model and redirect our user to a page where they can fill in
+the model&#39;s other fields.</p>
+<p>Let&#39;s take a look at those other fields now.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
 <li><a href="https://docs.djangoproject.com/en/1.8/topics/forms/">Django forms overview</a></li>
 <li><a href="https://docs.djangoproject.com/en/1.8/ref/contrib/messages/">Django messages framework</a></li>
 <li><a href="https://docs.djangoproject.com/en/1.8/topics/http/shortcuts/#redirect">Django redirect shortcut</a></li>
+<li><a href="https://en.wikipedia.org/wiki/E.164">E.164 format</a></li>
 </ul>
-</div><div data-file="call_tracking/models.py" data-highlight="1-22" class="step"><h2 id="the-leadsource-model">The LeadSource model</h2>
-<ul>
-<li>Explain that our model has just enough fields to associate an incoming call with a forwarding number</li>
-<li>Again highlight use of django-phonenumber-field - this time for a model field</li>
-<li>One sentence about why <code>@python_2_unicode_compatible</code> decorator is necessary</li>
-<li>Transition to <code>Lead</code> model</li>
-</ul>
+</div><div data-file="call_tracking/models.py" data-highlight="22-40" class="step"><h2 id="the-leadsource-model">The LeadSource model</h2>
+<p>Our <code>LeadSource</code> model stores the numbers we purchase from Twilio in our
+database.</p>
+<p>We store the Twilio phone number in the <code>incoming_number</code> field and the
+employee&#39;s phone number in the <code>forwarding_number</code> field. We use the
+<a href="https://github.com/stefanfoulis/django-phonenumber-field">django-phonenumber-field</a>
+library here again - this time for its <code>PhoneNumberField</code> model field.</p>
+<p>To capture data about how many phone calls each <code>LeadSource</code> receives, we
+use a different model, <code>Lead</code>. Let&#39;s look at that now.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
 <li><a href="https://docs.djangoproject.com/en/1.8/topics/db/models/">Django Models</a></li>
 <li><a href="https://docs.djangoproject.com/en/1.8/topics/python3/#str-and-unicode-methods">Django @python_2_unicode_compatible decorator</a></li>
 </ul>
-</div><div data-file="call_tracking/models.py" data-highlight="37-49" class="step"><h2 id="the-lead-model">The Lead model</h2>
-<ul>
-<li>Explain the many-to-one relationship between Leads and LeadSources</li>
-<li>Point out that <code>city</code> and <code>state</code> are just a couple of the fields
-a developer could choose to record about each call</li>
-<li>Transition to <code>forward_call</code> view, where <code>Lead</code>s are created</li>
-</ul>
+</div><div data-file="call_tracking/models.py" data-highlight="59-74" class="step"><h2 id="the-lead-model">The Lead model</h2>
+<p>A <code>Lead</code> represents a phone call to one of our phone numbers. Each time
+somebody calls one of our Twilio numbers, we&#39;ll use the <code>Lead</code> model to
+record some data about their call.</p>
+<p>We use a ForiegnKey field to associate each <code>Lead</code> with a <code>LeadSource</code>,
+and we again use
+<a href="https://github.com/stefanfoulis/django-phonenumber-field">django-phonenumber-field</a>&#39;s
+<code>PhoneNumberField</code> to store the caller&#39;s phone number.</p>
+<p>We also include fields for some metadata Twilio provides about incoming
+calls. City and state are just two examples -
+<a href="https://www.twilio.com/docs/api/twiml/twilio_request">check out the docs for more</a>.</p>
+<p><code>Lead</code>s are created in our <code>forward_call</code> view - let&#39;s look at that next.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
-<li><a href="https://www.twilio.com/docs/api/twiml/twilio_request">Twilio voice request parameters</a></li>
 <li><a href="https://docs.djangoproject.com/en/1.8/topics/db/examples/many_to_one/">Django ForeignKey relationships</a></li>
 </ul>
 </div><div data-file="call_tracking/views.py" data-highlight="118-138" class="step"><h2 id="forward-calls-and-create-leads">Forward calls and create Leads</h2>
-<ul>
-<li>Explain use of Twilio API&#39;s <code>Called</code> POST data element to determine the <code>LeadSource</code> for an incoming call</li>
-<li>Explain creating a new <code>Lead</code> from other elements in the POST data</li>
-<li>Explain using the <code>&lt;dial&gt;</code> verb to create the response that connects the call to the <code>fowarding_number</code></li>
-</ul>
+<p>Our <code>forward_call</code> view is wired up to the <code>/call-tracking/forward-call</code>
+URL of our application. Whenever someone calls one of our Twilio numbers,
+Twilio will send a POST request to that URL with data about the
+incoming call.</p>
+<p>Our view&#39;s job is to to connect the caller to the correct
+<code>forwarding_number</code> and record some data about their call.</p>
+<p>We start by using the <code>Called</code> value in the POST data to determine the
+<code>LeadSource</code> for this call.</p>
+<p>We then store some data about this call by creating a new <code>Lead</code> object
+using the <code>CallerCity</code> and <code>CallerState</code> fields Twilio sent us in the
+POST data.</p>
+<p>Finally, we wrap up the response by creating some
+<a href="https://www.twilio.com/docs/api/twiml">TwiML</a> that connects our caller
+with the <code>forwarding_number</code> of our <code>LeadSource</code> using the &lt;Dial&gt; TwiML
+verb.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
@@ -122,10 +161,10 @@ a developer could choose to record about each call</li>
 <li><a href="https://twilio-python.readthedocs.org/en/latest/usage/twiml.html">TwiML creation with twilio-python</a></li>
 <li><a href="https://www.twilio.com/docs/api/twiml/dial">TwiML &lt;Dial&gt; verb</a></li>
 </ul>
-</div><div data-file="call_tracking/models.py" data-highlight="1-34" class="step"><h2 id="get-statistics-about-our-lead-sources">Get statistics about our Lead Sources</h2>
+</div><div data-file="call_tracking/models.py" data-highlight="1-40" class="step"><h2 id="get-statistics-about-our-lead-sources">Get statistics about our Lead Sources</h2>
 <ul>
 <li>A brief sentence about why these stats might be useful</li>
-<li>Explain use of Django&#39;s annotation feature (and `.values() method) to get these stats</li>
+<li>Explain use of Django&#39;s annotation feature (and <code>.values()</code> method) to get these stats</li>
 <li>Explain why this is a <code>classmethod</code> instead of a regular model method</li>
 <li>Transition to Chart.js step</li>
 </ul>
