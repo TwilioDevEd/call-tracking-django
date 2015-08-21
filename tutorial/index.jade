@@ -6,6 +6,8 @@
       This [Django](http://djangoproject.com/) web application shows how you can
       use Twilio to track the effectiveness of different marketing channels.
 
+      ![Call tracking home page](http://howtodocs.s3.amazonaws.com/call-tracking-home.png)
+
       This application has three main features:
 
       - It purchases phone numbers from Twilio to use in different marketing
@@ -96,6 +98,8 @@
 
       To run our application yourself, you'll need to [create your own TwiML app
       first](https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app).
+
+      ![Creating a TwiML app](http://howtodocs.s3.amazonaws.com/call-tracking-twiml-app.gif)
 
       We'll look at the view which calls this function next.
 
@@ -244,6 +248,8 @@
       To display our statistics on homepage, we added some pie charts using
       [Chart.js](http://www.chartjs.org/). This JavaScript code configures those
       charts.
+
+      ![Call tracking charts](http://howtodocs.s3.amazonaws.com/call-tracking-charts.png)
 
       We first use jQuery's `$.get()` to make AJAX calls to our server and
       retrieve our data. We then loop over the data in each response and

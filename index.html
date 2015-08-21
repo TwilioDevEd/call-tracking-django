@@ -12,6 +12,7 @@
 }</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="Call Tracking"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">Call Tracking</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Use Twilio to track the effectiveness of your different marketing campaigns. Let's get started!</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="Call Tracking with Twilio and Django" class="chapter"><div data-file="call_tracking/views.py" data-highlight="118-138" class="step"><h2 id="what-does-this-thing-do-">What does this thing do?</h2>
 <p>This <a href="http://djangoproject.com/">Django</a> web application shows how you can
 use Twilio to track the effectiveness of different marketing channels.</p>
+<p><img src="http://howtodocs.s3.amazonaws.com/call-tracking-home.png" alt="Call tracking home page"></p>
 <p>This application has three main features:</p>
 <ul>
 <li>It purchases phone numbers from Twilio to use in different marketing
@@ -78,6 +79,7 @@ purchase. They&#39;re really handy for applications like ours, where we want
 calls to each of our numbers to use the same Voice URL on our server.</p>
 <p>To run our application yourself, you&#39;ll need to <a href="https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app">create your own TwiML app
 first</a>.</p>
+<p><img src="http://howtodocs.s3.amazonaws.com/call-tracking-twiml-app.gif" alt="Creating a TwiML app"></p>
 <p>We&#39;ll look at the view which calls this function next.</p>
 <hr>
 <p><strong>See also:</strong></p>
@@ -181,6 +183,7 @@ the <code>Lead</code> model.</p>
 <p>To display our statistics on homepage, we added some pie charts using
 <a href="http://www.chartjs.org/">Chart.js</a>. This JavaScript code configures those
 charts.</p>
+<p><img src="http://howtodocs.s3.amazonaws.com/call-tracking-charts.png" alt="Call tracking charts"></p>
 <p>We first use jQuery&#39;s <code>$.get()</code> to make AJAX calls to our server and
 retrieve our data. We then loop over the data in each response and
 add it to a new array, <code>chartData</code>, in the format Chart.js expects.</p>
