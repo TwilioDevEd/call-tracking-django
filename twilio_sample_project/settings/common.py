@@ -72,7 +72,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'sample_project.urls'
+ROOT_URLCONF = 'twilio_sample_project.urls'
 
 TEMPLATES = [
     {
@@ -90,7 +90,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'sample_project.wsgi.application'
+WSGI_APPLICATION = 'twilio_sample_project.wsgi.application'
 
 
 # Database

@@ -25,7 +25,9 @@ class LeadSource(models.Model):
         max_length=100,
         blank=True,
         help_text='E.g. "Downtown billboard"')
-    incoming_number = PhoneNumberField(unique=True)
+    incoming_number = PhoneNumberField(
+        unique=True,
+        help_text='A phone number purchased through Twilio')
     forwarding_number = PhoneNumberField(
         blank=True,
         help_text='People who call this lead source will be connected with this phone number. Must include international prefix - e.g. +1 555 555 55555')
