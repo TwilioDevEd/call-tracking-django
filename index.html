@@ -161,13 +161,15 @@ verb.</p>
 <li><a href="https://twilio-python.readthedocs.org/en/latest/usage/twiml.html">TwiML creation with twilio-python</a></li>
 <li><a href="https://www.twilio.com/docs/api/twiml/dial">TwiML &lt;Dial&gt; verb</a></li>
 </ul>
-</div><div data-file="call_tracking/models.py" data-highlight="1-40" class="step"><h2 id="get-statistics-about-our-lead-sources">Get statistics about our Lead Sources</h2>
-<ul>
-<li>A brief sentence about why these stats might be useful</li>
-<li>Explain use of Django&#39;s annotation feature (and <code>.values()</code> method) to get these stats</li>
-<li>Explain why this is a <code>classmethod</code> instead of a regular model method</li>
-<li>Transition to Chart.js step</li>
-</ul>
+</div><div data-file="call_tracking/models.py" class="step"><h2 id="get-statistics-about-our-lead-sources">Get statistics about our Lead Sources</h2>
+<p>One useful statistic we can get from our data is how many calls each
+<code>LeadSource</code> has received.</p>
+<p>We use the Django ORM&#39;s annotate feature to make a list containing each
+<code>LeadSource</code> and a count of its <code>Lead</code>s.</p>
+<p>We created a custom model manager so that we can easily access this data
+in our views by calling <code>LeadSource.objects.get_leads_per_source()</code>. And
+we used the same technique to create a <code>get_leads_per_city()</code> method for
+the <code>Lead</code> model.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
@@ -176,28 +178,37 @@ verb.</p>
 <li><a href="https://docs.djangoproject.com/en/1.8/ref/models/querysets/#values">Django queryset values() method</a></li>
 </ul>
 </div><div data-file="call_tracking/static/js/callTracking.js" class="step"><h2 id="visualize-our-statistics-with-chart-js">Visualize our statistics with Chart.js</h2>
-<ul>
-<li>Explain choice of Chart.js library for this tutorial (simplicity)</li>
-<li>Allude to JSON views which provide this data using the methods covered in the previous step</li>
-<li>Explain data munging to get data in right format for Chart.js</li>
-<li>Include screenshot of what populated charts look like</li>
-</ul>
+<p>To display our statistics on homepage, we added some pie charts using
+<a href="http://www.chartjs.org/">Chart.js</a>. This JavaScript code configures those
+charts.</p>
+<p>We first use jQuery&#39;s <code>$.get()</code> to make AJAX calls to our server and
+retrieve our data. We then loop over the data in each response and
+add it to a new array, <code>chartData</code>, in the format Chart.js expects.</p>
+<p>Then we just tell Chart.js to make new pie charts with our data
+in some divs we created in our <code>index.html</code> template.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
 <li><a href="http://www.chartjs.org/docs/#doughnut-pie-chart">Chart.js pie charts</a></li>
 <li><a href="https://api.jquery.com/jquery.get/">jQuery $.get() method</a></li>
+<li><a href="https://docs.djangoproject.com/en/1.8/ref/request-response/#jsonresponse-objects">Django&#39;s JsonResponse</a></li>
 </ul>
 </div><div data-file="call_tracking/views.py" data-highlight="118-138" class="step"><h2 id="where-to-next-">Where to next?</h2>
-<ul>
-<li>Wrap up text</li>
-<li>Link to other tutorials:<ul>
-<li>Click to call - <a href="https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask">https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask</a></li>
-<li>Appointment Reminders - <a href="https://www.twilio.com/docs/howto/walkthrough/appointment-reminders/python/django">https://www.twilio.com/docs/howto/walkthrough/appointment-reminders/python/django</a></li>
-</ul>
-</li>
-<li>Email us with feedback - devedoss@twilio.com</li>
-</ul>
+<p>That&#39;s it! Our Django application is now ready to purchase new phone
+numbers, forward incoming calls, and record some statistics for our
+business.</p>
+<p>If you&#39;re a Python developer working with Twilio, you might enjoy these
+other tutorials:</p>
+<p><a href="https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask"><strong>Click-to-call</strong></a>
+(Flask)</p>
+<p>Put a button on your web page that connects visitors to live support or sales people via telephone.</p>
+<p><a href="https://www.twilio.com/docs/howto/walkthrough/appointment-reminders/python/django"><strong>Appointment Reminders</strong></a>
+(Django)</p>
+<p>Send your customers automatic reminders ahead of appoiments using Twilio
+SMS messaging.</p>
+<p>Thanks for checking out this tutorial! If you have any feedback to share
+with us, we&#39;d love to hear it. Tweet <a href="https://twitter.com/twilio">@twilio</a>
+to let us know what you think.</p>
 </div></div>
 <div class="saurus-files" style="display:none;"><textarea class="saurus-file" data-file="call_tracking/views.py" data-mode="python">ZnJvbSBkamFuZ28uY29udHJpYiBpbXBvcnQgbWVzc2FnZXMKZnJvbSBkamFuZ28uY29udHJpYi5tZXNzYWdlcy52aWV3cyBpbXBvcnQgU3VjY2Vzc01lc3NhZ2VNaXhpbgpmcm9tIGRqYW5nby5jb3JlLnVybHJlc29sdmVycyBpbXBvcnQgcmV2ZXJzZV9sYXp5CmZyb20gZGphbmdvLmh0dHAgaW1wb3J0IEh0dHBSZXNwb25zZSwgSnNvblJlc3BvbnNlCmZyb20gZGphbmdvLnNob3J0Y3V0cyBpbXBvcnQgcmVuZGVyLCByZWRpcmVjdApmcm9tIGRqYW5nby50ZW1wbGF0ZS5jb250ZXh0X3Byb2Nlc3NvcnMgaW1wb3J0IGNzcmYKZnJvbSBkamFuZ28udmlld3MuZGVjb3JhdG9ycy5jc3JmIGltcG9ydCBjc3JmX2V4ZW1wdApmcm9tIGRqYW5nby52aWV3cy5nZW5lcmljLmJhc2UgaW1wb3J0IFRlbXBsYXRlVmlldwpmcm9tIGRqYW5nby52aWV3cy5nZW5lcmljLmVkaXQgaW1wb3J0IFVwZGF0ZVZpZXcKZnJvbSB0d2lsaW8gaW1wb3J0IHR3aW1sCgpmcm9tIC5mb3JtcyBpbXBvcnQgQXJlYUNvZGVGb3JtLCBQdXJjaGFzZU51bWJlckZvcm0KZnJvbSAubW9kZWxzIGltcG9ydCBMZWFkU291cmNlLCBMZWFkCmZyb20gLnV0aWxzIGltcG9ydCBzZWFyY2hfcGhvbmVfbnVtYmVycywgcHVyY2hhc2VfcGhvbmVfbnVtYmVyCgoKIyBIb21lIHBhZ2UgdmlldyBhbmQgSlNPTiB2aWV3cyB0byBwb3dlciB0aGUgY2hhcnRzCmRlZiBob21lKHJlcXVlc3QpOgogICAgIiIiUmVuZGVycyB0aGUgaG9tZSBwYWdlIiIiCiAgICBjb250ZXh0ID0ge30KCiAgICAjIEFkZCB0aGUgYXJlYSBjb2RlIGZvcm0gLSBkZWZhdWx0IHRvIDQxNQogICAgY29udGV4dFsnZm9ybSddID0gQXJlYUNvZGVGb3JtKHsnYXJlYV9jb2RlJzogJzQxNSd9KQoKICAgICMgQWRkIHRoZSBsaXN0IG9mIGxlYWQgc291cmNlcwogICAgY29udGV4dFsnbGVhZF9zb3VyY2VzJ10gPSBMZWFkU291cmNlLm9iamVjdHMuYWxsKCkKCiAgICByZXR1cm4gcmVuZGVyKHJlcXVlc3QsICdpbmRleC5odG1sJywgY29udGV4dCkKCgpkZWYgbGVhZHNfYnlfc291cmNlKHJlcXVlc3QpOgogICAgIiIiUmV0dXJucyBKU09OIGRhdGEgYWJvdXQgdGhlIGxlYWQgc291cmNlcyBhbmQgaG93IG1hbnkgbGVhZHMgdGhleSBoYXZlIiIiCiAgICAjIEludm9rZSBhIExlYWRTb3VyY2UgY2xhc3NtZXRob2QgdG8gZ2V0IHRoZSBkYXRhCiAgICBkYXRhID0gTGVhZFNvdXJjZS5vYmplY3RzLmdldF9sZWFkc19wZXJfc291cmNlKCkKCiAgICAjIFJldHVybiBpdCBhcyBKU09OIC0gdXNlIHNhZmU9RmFsc2UgYmVjYXVzZSB3ZSdyZSBzZW5kaW5nIGEgSlNPTiBhcnJheQogICAgcmV0dXJuIEpzb25SZXNwb25zZShkYXRhLCBzYWZlPUZhbHNlKQoKCmRlZiBsZWFkc19ieV9jaXR5KHJlcXVlc3QpOgogICAgIiIiUmV0dXJucyBKU09OIGRhdGEgYWJvdXQgdGhlIGRpZmZlcmVudCBjaXRpZXMgbGVhZHMgY29tZSBmcm9tIiIiCiAgICAjIEludm9rZSBhIExlYWQgY2xhc3NtZXRob2QgdG8gZ2V0IHRoZSBkYXRhCiAgICBkYXRhID0gTGVhZC5vYmplY3RzLmdldF9sZWFkc19wZXJfY2l0eSgpCgogICAgIyBSZXR1cm4gaXQgYXMgSlNPTiAtIHVzZSBzYWZlPUZhbHNlIGJlY2F1c2Ugd2UncmUgc2VuZGluZyBhIEpTT04gYXJyYXkKICAgIHJldHVybiBKc29uUmVzcG9uc2UoZGF0YSwgc2FmZT1GYWxzZSkKCgojIFZpZXdzIGZvciBwdXJjaGFzZSBudW1iZXIgd29ya2Zsb3cKZGVmIGxpc3RfbnVtYmVycyhyZXF1ZXN0KToKICAgICIiIlVzZXMgdGhlIFR3aWxpbyBBUEkgdG8gZ2VuZXJhdGUgYSBsaXN0IG9mIGF2YWlsYWJsZSBwaG9uZSBudW1iZXJzIiIiCiAgICBmb3JtID0gQXJlYUNvZGVGb3JtKHJlcXVlc3QuUE9TVCkKCiAgICBpZiBmb3JtLmlzX3ZhbGlkKCk6CiAgICAgICAgIyBXZSByZWNlaXZlZCBhIHZhbGlkIGFyZWEgY29kZSAtIHF1ZXJ5IHRoZSBUd2lsaW8gQVBJCiAgICAgICAgYXJlYV9jb2RlID0gZm9ybS5jbGVhbmVkX2RhdGFbJ2FyZWFfY29kZSddCgogICAgICAgIGF2YWlsYWJsZV9udW1iZXJzID0gc2VhcmNoX3Bob25lX251bWJlcnMoYXJlYV9jb2RlPWFyZWFfY29kZSkKCiAgICAgICAgIyBDaGVjayBpZiB0aGVyZSBhcmUgbm8gbnVtYmVycyBhdmFpbGFibGUgaW4gdGhpcyBhcmVhIGNvZGUKICAgICAgICBpZiBub3QgYXZhaWxhYmxlX251bWJlcnM6CiAgICAgICAgICAgIG1lc3NhZ2VzLmVycm9yKAogICAgICAgICAgICAgICAgcmVxdWVzdCwKICAgICAgICAgICAgICAgICdUaGVyZSBhcmUgbm8gVHdpbGlvIG51bWJlcnMgYXZhaWxhYmxlIGZvciBhcmVhIGNvZGUgezB9LiBTZWFyY2ggZm9yIG51bWJlcnMgaW4gYSBkaWZmZXJlbnQgYXJlYSBjb2RlLicuZm9ybWF0KGFyZWFfY29kZSkpCiAgICAgICAgICAgIHJldHVybiByZWRpcmVjdCgnaG9tZScpCgogICAgICAgIGNvbnRleHQgPSB7fQogICAgICAgIGNvbnRleHRbJ2F2YWlsYWJsZV9udW1iZXJzJ10gPSBhdmFpbGFibGVfbnVtYmVycwoKICAgICAgICByZXR1cm4gcmVuZGVyKHJlcXVlc3QsICdjYWxsX3RyYWNraW5nL2xpc3RfbnVtYmVycy5odG1sJywgY29udGV4dCkKICAgIGVsc2U6CiAgICAgICAgIyBPdXIgYXJlYSBjb2RlIHdhcyBpbnZhbGlkIC0gZmxhc2ggYSBtZXNzYWdlIGFuZCByZWRpcmVjdCBiYWNrIGhvbWUKICAgICAgICBiYWRfYXJlYV9jb2RlID0gZm9ybS5kYXRhWydhcmVhX2NvZGUnXQogICAgICAgIG1lc3NhZ2VzLmVycm9yKHJlcXVlc3QsICd7MH0gaXMgbm90IGEgdmFsaWQgYXJlYSBjb2RlLiBQbGVhc2Ugc2VhcmNoIGFnYWluLicKICAgICAgICAgICAgICAgICAgICAgICAuZm9ybWF0KGJhZF9hcmVhX2NvZGUpKQoKICAgICAgICByZXR1cm4gcmVkaXJlY3QoJ2hvbWUnKQoKCmRlZiBwdXJjaGFzZV9udW1iZXIocmVxdWVzdCk6CiAgICAiIiJQdXJjaGFzZXMgYSBuZXcgcGhvbmUgbnVtYmVyIHVzaW5nIHRoZSBUd2lsaW8gQVBJIiIiCiAgICBmb3JtID0gUHVyY2hhc2VOdW1iZXJGb3JtKHJlcXVlc3QuUE9TVCkKCiAgICBpZiBmb3JtLmlzX3ZhbGlkKCk6CiAgICAgICAgIyBQdXJjaGFzZSB0aGUgcGhvbmUgbnVtYmVyCiAgICAgICAgcGhvbmVfbnVtYmVyID0gZm9ybS5jbGVhbmVkX2RhdGFbJ3Bob25lX251bWJlciddCiAgICAgICAgdHdpbGlvX251bWJlciA9IHB1cmNoYXNlX3Bob25lX251bWJlcihwaG9uZV9udW1iZXIuYXNfZTE2NCkKCiAgICAgICAgIyBTYXZlIGl0IGluIGEgbmV3IExlYWRTb3VyY2Ugb2JqZWN0CiAgICAgICAgbGVhZF9zb3VyY2UgPSBMZWFkU291cmNlKGluY29taW5nX251bWJlcj10d2lsaW9fbnVtYmVyLnBob25lX251bWJlcikKICAgICAgICBsZWFkX3NvdXJjZS5zYXZlKCkKCiAgICAgICAgbWVzc2FnZXMuc3VjY2VzcygKICAgICAgICAgICAgcmVxdWVzdCwKICAgICAgICAgICAgJ1Bob25lIG51bWJlciB7MH0gaGFzIGJlZW4gcHVyY2hhc2VkLiBQbGVhc2UgYWRkIGEgbmFtZSBmb3IgdGhpcyBsZWFkIHNvdXJjZS4nLmZvcm1hdCgKICAgICAgICAgICAgICAgIHR3aWxpb19udW1iZXIuZnJpZW5kbHlfbmFtZSkpCgogICAgICAgICMgUmVkaXJlY3QgdG8gZWRpdCBsZWFkIHBhZ2UKICAgICAgICByZXR1cm4gcmVkaXJlY3QoJ2VkaXRfbGVhZF9zb3VyY2UnLCBwaz1sZWFkX3NvdXJjZS5waykKICAgIGVsc2U6CiAgICAgICAgIyBJbiB0aGUgdW5saWtlbHkgZXZlbnQgb2YgYW4gZXJyb3IsIHJlZGlyZWN0IHRvIHRoZSBob21lIHBhZ2UKICAgICAgICBiYWRfcGhvbmVfbnVtYmVyID0gZm9ybS5kYXRhWydwaG9uZV9udW1iZXInXQogICAgICAgIG1lc3NhZ2VzLmVycm9yKHJlcXVlc3QsICd7MH0gaXMgbm90IGEgdmFsaWQgcGhvbmUgbnVtYmVyLiBQbGVhc2Ugc2VhcmNoIGFnYWluLicKICAgICAgICAgICAgICAgICAgICAgICAuZm9ybWF0KGJhZF9waG9uZV9udW1iZXIpKQoKICAgICAgICByZXR1cm4gcmVkaXJlY3QoJ2hvbWUnKQoKCmNsYXNzIExlYWRTb3VyY2VVcGRhdGVWaWV3KFN1Y2Nlc3NNZXNzYWdlTWl4aW4sIFVwZGF0ZVZpZXcpOgogICAgIiIiUG93ZXJzIGEgZm9ybSB0byBlZGl0IExlYWQgU291cmNlcyIiIgoKICAgIG1vZGVsID0gTGVhZFNvdXJjZQogICAgZmllbGRzID0gWyduYW1lJywgJ2ZvcndhcmRpbmdfbnVtYmVyJ10KICAgIHN1Y2Nlc3NfdXJsID0gcmV2ZXJzZV9sYXp5KCdob21lJykKICAgIHN1Y2Nlc3NfbWVzc2FnZSA9ICdMZWFkIHNvdXJjZSBzdWNjZXNzZnVsbHkgdXBkYXRlZC4nCgoKIyBWaWV3IHVzZWQgYnkgVHdpbGlvIEFQSSB0byBjb25uZWN0IGNhbGxlcnMgdG8gdGhlIHJpZ2h0IGZvcndhcmRpbmcKIyBudW1iZXIgZm9yIHRoYXQgbGVhZCBzb3VyY2UKQGNzcmZfZXhlbXB0CmRlZiBmb3J3YXJkX2NhbGwocmVxdWVzdCk6CiAgICAiIiJDb25uZWN0cyBhbiBpbmNvbWluZyBjYWxsIHRvIHRoZSBjb3JyZWN0IGZvcndhcmRpbmcgbnVtYmVyIiIiCiAgICAjIEZpcnN0IGxvb2sgdXAgdGhlIGxlYWQgc291cmNlCiAgICBzb3VyY2UgPSBMZWFkU291cmNlLm9iamVjdHMuZ2V0KGluY29taW5nX251bWJlcj1yZXF1ZXN0LlBPU1RbJ0NhbGxlZCddKQoKICAgICMgQ3JlYXRlIGEgbGVhZCBlbnRyeSBmb3IgdGhpcyBjYWxsCiAgICBsZWFkID0gTGVhZCgKICAgICAgICBzb3VyY2U9c291cmNlLAogICAgICAgIHBob25lX251bWJlcj1yZXF1ZXN0LlBPU1RbJ0NhbGxlciddLAogICAgICAgIGNpdHk9cmVxdWVzdC5QT1NUWydDYWxsZXJDaXR5J10sCiAgICAgICAgc3RhdGU9cmVxdWVzdC5QT1NUWydDYWxsZXJTdGF0ZSddKQogICAgbGVhZC5zYXZlKCkKCiAgICAjIFJlc3BvbmQgd2l0aCBzb21lIFR3aU1MIHRoYXQgY29ubmVjdHMgdGhlIGNhbGxlciB0byB0aGUgZm9yd2FyZGluZ19udW1iZXIKICAgIHIgPSB0d2ltbC5SZXNwb25zZSgpCiAgICByLmRpYWwoc291cmNlLmZvcndhcmRpbmdfbnVtYmVyLmFzX2UxNjQpCgogICAgcmV0dXJuIEh0dHBSZXNwb25zZShyKQo=</textarea>
 <textarea class="saurus-file" data-file="call_tracking/utils.py" data-mode="python">ZnJvbSBkamFuZ28uY29uZiBpbXBvcnQgc2V0dGluZ3MKZnJvbSB0d2lsaW8ucmVzdCBpbXBvcnQgVHdpbGlvUmVzdENsaWVudAoKaW1wb3J0IG9zCgojIFVzZXMgY3JlZGVudGlhbHMgZGVmaW5lZCBpbiBUV0lMSU9fQUNDT1VOVF9TSUQgYW5kIFRXSUxJT19BVVRIX1RPS0VOCiMgZW52aXJvbm1lbnQgdmFyaWFibGVzCmNsaWVudCA9IFR3aWxpb1Jlc3RDbGllbnQoKQoKCmRlZiBzZWFyY2hfcGhvbmVfbnVtYmVycyhhcmVhX2NvZGU9Tm9uZSk6CiAgICAiIiJRdWVyaWVzIHRoZSBUd2lsaW8gUkVTVCBBUEkgdG8gZ2V0IHBob25lIG51bWJlcnMgYXZhaWxhYmxlIGZvciBwdWNoYXNlIiIiCiAgICAjIFlvdSBjYW4gY2hhbmdlIHRoZSBjb3VudHJ5IGFyZ3VtZW50IHRvIHNlYXJjaCBvdXRzaWRlIHRoZSBVUwogICAgbnVtYmVycyA9IGNsaWVudC5waG9uZV9udW1iZXJzLnNlYXJjaChhcmVhX2NvZGU9YXJlYV9jb2RlLCBjb3VudHJ5PSdVUycpCgogICAgIyBSZXR1cm5zIDMwIGJ5IGRlZmF1bHQgLSBsZXQncyB0cmltIHRoZSBsaXN0IGZvciBVWCBwdXJwb3NlcwogICAgcmV0dXJuIG51bWJlcnNbOjEwXQoKCmRlZiBwdXJjaGFzZV9waG9uZV9udW1iZXIocGhvbmVfbnVtYmVyKToKICAgICIiIlB1cmNoYXNlcyBhIG5ldyBwaG9uZSBudW1iZXIgZnJvbSB0aGUgVHdpbGlvIEFQSSIiIgogICAgIyBVc2UgYSBUd2lsaW8gQXBwbGljYXRpb24gU0lEIHNvIGFsbCBvdXIgbnVtYmVycyB1c2UgdGhlIHNhbWUgdm9pY2UgVVJMCiAgICBudW1iZXIgPSBjbGllbnQucGhvbmVfbnVtYmVycy5wdXJjaGFzZSgKICAgICAgICBwaG9uZV9udW1iZXI9cGhvbmVfbnVtYmVyLAogICAgICAgIHZvaWNlX2FwcGxpY2F0aW9uX3NpZD1zZXR0aW5ncy5UV0lMSU9fQVBQTElDQVRJT05fU0lEKQoKICAgIHJldHVybiBudW1iZXIK</textarea>

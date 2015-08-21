@@ -214,14 +214,20 @@
       * [TwiML creation with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/twiml.html)
       * [TwiML <Dial> verb](https://www.twilio.com/docs/api/twiml/dial)
 
-  .step(data-file='call_tracking/models.py', data-highlight='1-40')
+  .step(data-file='call_tracking/models.py')
     :markdown
       ## Get statistics about our Lead Sources
 
-      - A brief sentence about why these stats might be useful
-      - Explain use of Django's annotation feature (and `.values()` method) to get these stats
-      - Explain why this is a `classmethod` instead of a regular model method
-      - Transition to Chart.js step
+      One useful statistic we can get from our data is how many calls each
+      `LeadSource` has received.
+
+      We use the Django ORM's annotate feature to make a list containing each
+      `LeadSource` and a count of its `Lead`s.
+
+      We created a custom model manager so that we can easily access this data
+      in our views by calling `LeadSource.objects.get_leads_per_source()`. And
+      we used the same technique to create a `get_leads_per_city()` method for
+      the `Lead` model.
 
       ---
 
@@ -235,11 +241,16 @@
     :markdown
       ## Visualize our statistics with Chart.js
 
-      - Explain choice of Chart.js library for this tutorial (simplicity)
-      - Allude to JSON views which provide this data using the methods covered in the previous step
-      - Explain data munging to get data in right format for Chart.js
-      - Include screenshot of what populated charts look like
+      To display our statistics on homepage, we added some pie charts using
+      [Chart.js](http://www.chartjs.org/). This JavaScript code configures those
+      charts.
 
+      We first use jQuery's `$.get()` to make AJAX calls to our server and
+      retrieve our data. We then loop over the data in each response and
+      add it to a new array, `chartData`, in the format Chart.js expects.
+
+      Then we just tell Chart.js to make new pie charts with our data
+      in some divs we created in our `index.html` template.
 
       ---
 
@@ -247,13 +258,30 @@
 
       * [Chart.js pie charts](http://www.chartjs.org/docs/#doughnut-pie-chart)
       * [jQuery $.get() method](https://api.jquery.com/jquery.get/)
+      * [Django's JsonResponse](https://docs.djangoproject.com/en/1.8/ref/request-response/#jsonresponse-objects)
 
   .step(data-file='call_tracking/views.py', data-highlight='118-138')
     :markdown
       ## Where to next?
 
-      - Wrap up text
-      - Link to other tutorials:
-        - Click to call - https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask
-        - Appointment Reminders - https://www.twilio.com/docs/howto/walkthrough/appointment-reminders/python/django
-      - Email us with feedback - devedoss@twilio.com
+      That's it! Our Django application is now ready to purchase new phone
+      numbers, forward incoming calls, and record some statistics for our
+      business.
+
+      If you're a Python developer working with Twilio, you might enjoy these
+      other tutorials:
+
+      [**Click-to-call**](https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask)
+      (Flask)
+
+      Put a button on your web page that connects visitors to live support or sales people via telephone.
+
+      [**Appointment Reminders**](https://www.twilio.com/docs/howto/walkthrough/appointment-reminders/python/django)
+      (Django)
+
+      Send your customers automatic reminders ahead of appoiments using Twilio
+      SMS messaging.
+
+      Thanks for checking out this tutorial! If you have any feedback to share
+      with us, we'd love to hear it. Tweet [@twilio](https://twitter.com/twilio)
+      to let us know what you think.
