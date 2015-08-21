@@ -11,6 +11,7 @@ client = TwilioRestClient()
 def search_phone_numbers(area_code=None):
     """Queries the Twilio REST API to get phone numbers available for puchase"""
     # You can change the country argument to search outside the US
+    # area_code is an optional parameter
     numbers = client.phone_numbers.search(area_code=area_code, country='US')
 
     # Returns 30 by default - let's trim the list for UX purposes

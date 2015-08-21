@@ -4,7 +4,7 @@
 source = .
 
 omit = 
-  sample_project/settings/*
-  sample_project/wsgi.py
+  twilio_sample_project/settings/*
+  twilio_sample_project/wsgi.py
   */migrations/*
   */tests.py

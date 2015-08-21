@@ -90,7 +90,7 @@ http://88b37ada.ngrok.io/call-tracking/forward-call
 You can run the tests locally through [coverage](http://coverage.readthedocs.org/):
 
 ```
-$ coverage run manage.py test --settings=sample_project.settings.test
+$ coverage run manage.py test --settings=twilio_sample_project.settings.test
 ```
 
 You can then view the results with `coverage report` or build an HTML report with `coverage html`.
