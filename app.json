@@ -19,9 +19,9 @@
       "value": "enter_your_auth_token_here",
       "required": true
     },
-    "TWILIO_APPLICATION_SID": {
-      "description": "The secret ID for a Twilio Application you'll use with this app. Create one here: https://www.twilio.com/user/account/apps/add",
-      "value": "enter_your_twilio_application_sid_here",
+    "TWIML_APPLICATION_SID": {
+      "description": "The secret ID for a TwiML Application you'll use with this app. Create one here: https://www.twilio.com/user/account/apps/add",
+      "value": "enter_your_twiml_application_sid_here",
       "required": true
     },
     "DJANGO_SETTINGS_MODULE": {

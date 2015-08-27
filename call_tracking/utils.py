@@ -20,9 +20,9 @@ def search_phone_numbers(area_code=None):
 
 def purchase_phone_number(phone_number):
     """Purchases a new phone number from the Twilio API"""
-    # Use a Twilio Application SID so all our numbers use the same voice URL
+    # Use a TwiML Application SID so all our numbers use the same voice URL
     number = client.phone_numbers.purchase(
         phone_number=phone_number,
-        voice_application_sid=settings.TWILIO_APPLICATION_SID)
+        voice_application_sid=settings.TWIML_APPLICATION_SID)
 
     return number

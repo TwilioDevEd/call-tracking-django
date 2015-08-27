@@ -44,4 +44,4 @@ class PurchasePhoneNumberTest(TestCase):
         self.assertTrue(mock.called)
         mock.assert_called_with(
             phone_number='+15555555555',
-            voice_application_sid=settings.TWILIO_APPLICATION_SID)
+            voice_application_sid=settings.TWIML_APPLICATION_SID)
