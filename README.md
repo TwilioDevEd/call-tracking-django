@@ -11,7 +11,7 @@ Use Twilio to track the effectiveness of your different marketing campaigns. Lea
 
 This project is configured to use a **TwiML App**, which allows us to easily set the voice URLs for all Twilio phone numbers we purchase in this app.
 
-Create a new TwiML app at https://www.twilio.com/user/account/apps/add and use its `Sid` as the `TWILIO_APPLICATION_SID` environment variable wherever you run this app.
+Create a new TwiML app at https://www.twilio.com/user/account/apps/add and use its `Sid` as the `TWIML_APPLICATION_SID` environment variable wherever you run this app.
 
 ![Creating a TwiML App](http://howtodocs.s3.amazonaws.com/call-tracking-twiml-app.gif)
 

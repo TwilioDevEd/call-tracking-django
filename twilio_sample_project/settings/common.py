@@ -24,15 +24,15 @@ SECRET_KEY = 'not-so-secret'
 
 ALLOWED_HOSTS = []
 
-# Twilio Application SID - used to give all our phone numbers the same
+# TwimL Application SID - used to give all our phone numbers the same
 # voice URL setting. Learn more: https://www.twilio.com/blog/2011/06/introducing-twilio-applications-an-easier-way-to-manage-phone-numbers.html
-TWILIO_APPLICATION_SID = os.environ.get('TWILIO_APPLICATION_SID', None)
-if not TWILIO_APPLICATION_SID:
+TWIML_APPLICATION_SID = os.environ.get('TWIML_APPLICATION_SID', None)
+if not TWIML_APPLICATION_SID:
     missing_application_sid_message = \
     """
-    You *must* set a TWILIO_APPLICATION_SID environment variable to run this app.
+    You *must* set a TWIML_APPLICATION_SID environment variable to run this app.
 
-    Create a Twilio Application here: https://www.twilio.com/user/account/apps/add and set the Voice request URL to this value:
+    Create a TwiML Application here: https://www.twilio.com/user/account/apps/add and set the Voice request URL to this value:
 
     http://{{ your ngrok/server hostname here }}/call-tracking/forward-call
     """
