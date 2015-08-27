@@ -9,7 +9,7 @@
 .wrapper {
   height:100%;
   width:100%;
-}</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="Call Tracking"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">Call Tracking</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Use Twilio to track the effectiveness of your different marketing campaigns. Let's get started!</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="Call Tracking with Twilio and Django" class="chapter"><div data-file="call_tracking/views.py" data-highlight="118-138" class="step"><h2 id="what-does-this-thing-do-">What does this thing do?</h2>
+}</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="Call Tracking"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">Call Tracking</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Use Twilio to track the effectiveness of your marketing campaigns. Let's get started!</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="Call Tracking with Twilio and Django" class="chapter"><div data-file="call_tracking/static/js/callTracking.js" class="step"><h2 id="what-does-this-thing-do-">What does this thing do?</h2>
 <p>This <a href="http://djangoproject.com/">Django</a> web application shows how you can
 use Twilio to track the effectiveness of different marketing channels.</p>
 <p><img src="http://howtodocs.s3.amazonaws.com/call-tracking-home.png" alt="Call tracking home page"></p>
@@ -36,69 +36,49 @@ code snippet.</p>
 <li><a href="http://www.searchenginejournal.com/seo-beginner-guide-call-tracking-care/83173/">What is Call Tracking?</a></li>
 </ul>
 </div><div data-file="call_tracking/utils.py" data-highlight="1-18" class="step"><h2 id="search-for-available-phone-numbers">Search for available phone numbers</h2>
-<p>Before users can do anything with our app, they have to find an available
-Twilio phone number to purchase. We can search for a number using the
-Twilio REST API.</p>
-<p>Using the twilio-python helper library, we first create a <code>TwilioRestClient</code>
-in a <code>utils.py</code> module. <code>TwilioRestClient</code> looks for environment variables
-to find its credentials.</p>
-<p>Once we&#39;ve got our <code>client</code> ready, searching for available phone numbers
-is as easy as <code>phone_numbers.search()</code>. Twilio will return a list
-of phone numbers for our user to choose from.</p>
-<p>Let&#39;s look at the Django view which calls this code next.</p>
+<p>Call tracking requires us to search for and buy phone numbers on demand,
+associating a specific phone number with a lead source. This utility module
+uses the <a href="https://twilio-python.readthedocs.org/en/latest/usage/basics.html">twilio-python helper library</a>
+to search for phone numbers by area code and return a list of numbers
+that are available for purchase.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
-<li><a href="https://twilio-python.readthedocs.org/en/latest/usage/basics.html">Accessing REST resources with twilio-python</a></li>
-<li><a href="https://twilio-python.readthedocs.org/en/latest/usage/phone-numbers.html#searching-and-buying-a-number">Searching and Buying a Number with twilio-python</a></li>
-<li><a href="https://www.twilio.com/docs/api/rest/available-phone-numbers">Twilio REST API: Available Phone Numbers</a></li>
+<li><a href="https://twilio-python.readthedocs.org/en/latest/usage/basics.html">twilio-python helper library basics</a></li>
+<li><a href="https://twilio-python.readthedocs.org/en/latest/usage/phone-numbers.html#searching-and-buying-a-number">Searching for and buying numbers in twilio-python</a></li>
+<li><a href="https://www.twilio.com/docs/api/rest/available-phone-numbers">REST API: Available Phone Numbers</a></li>
 </ul>
-</div><div data-file="call_tracking/views.py" data-highlight="49-77" class="step"><h2 id="list-phone-numbers-view">List phone numbers view</h2>
-<p>When searching for a phone number, our users can optionally specify an
-area code. Our <code>list_numbers</code> view starts off validating that input with
-a one-field form called <code>AreaCodeForm</code>.</p>
-<p>We then call our <code>search_phone_numbers</code> function from the previous step
-to retrieve a list of available numbers. If that list comes back empty
-we redirect the user back home and tell them to try a different area code.</p>
-<p>Otherwise we use those numbers to render the <code>list_numbers.html</code> template,
-which is where our users will choose which number they want to purchase.</p>
+</div><div data-file="call_tracking/views.py" data-highlight="55-70" class="step"><h2 id="display-available-phone-numbers">Display available phone numbers</h2>
+<p>We display a form to the user on the app&#39;s home page which allows them to
+search for a new phone number by area code. At the view level, we use the
+utility module we created earlier to actually search for numbers, and display
+and HTML page to the user with a list of numbers they can choose to buy.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
 <li><a href="https://docs.djangoproject.com/en/1.8/topics/forms/">Django forms overview</a></li>
 <li><a href="https://docs.djangoproject.com/en/1.8/ref/contrib/messages/">Django messages framework</a></li>
 </ul>
-</div><div data-file="call_tracking/utils.py" class="step"><h2 id="purchase-a-phone-number">Purchase a phone number</h2>
+</div><div data-file="call_tracking/utils.py" data-highlight="21-28" class="step"><h2 id="buy-a-phone-number">Buy a phone number</h2>
 <p>Our <code>purchase_phone_number</code> utility function takes a phone number as its
-sole parameter and uses our Twilio API client to make the purchase.</p>
-<p>We also pass an extra argument to our <code>phone_numbers.purchase()</code> call for
-<code>voice_application_sid</code>. This lets us configure the new number to use
-a TwiML app for its Voice URL.</p>
-<p>TwiML apps let us apply the same URL configuration across all numbers we
-purchase. They&#39;re really handy for applications like ours, where we want
-calls to each of our numbers to use the same Voice URL on our server.</p>
-<p>To run our application yourself, you&#39;ll need to <a href="https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app">create your own TwiML app
-first</a>.</p>
-<p><img src="http://howtodocs.s3.amazonaws.com/call-tracking-twiml-app.gif" alt="Creating a TwiML app"></p>
-<p>We&#39;ll look at the view which calls this function next.</p>
+sole parameter and uses our Twilio API client to actually purchase one of
+the available phone numbers we searched for earlier.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
 <li><a href="https://twilio-python.readthedocs.org/en/latest/usage/phone-numbers.html#searching-and-buying-a-number">Searching and Buying a Number with twilio-python</a></li>
 <li><a href="https://www.twilio.com/docs/api/rest/available-phone-numbers">Twilio REST API: Available Phone Numbers</a></li>
 </ul>
-</div><div data-file="call_tracking/views.py" data-highlight="80-106" class="step"><h2 id="purchase-phone-number-view">Purchase phone number view</h2>
-<p>Our <code>purchase_number</code> view starts off sanitizing our POST data again, this
-time using a form called <code>PurchaseNumberForm</code>.</p>
-<p>The <code>phone_number</code> field on that form is a third-party field from the
-<a href="https://github.com/stefanfoulis/django-phonenumber-field">django-phonenumber-field</a>
-library. Our purchase function expects its phone number
-argument to look like <code>+155555555555</code>, so we need to use the form field&#39;s
-<code>.as_e164</code> property to get the right format.</p>
-<p>After the number has been purchased, we save it in a new instance of our
-<code>LeadSource</code> model and redirect our user to a page where they can fill in
-the model&#39;s other fields.</p>
-<p>Let&#39;s take a look at those other fields now.</p>
+</div><div data-file="call_tracking/utils.py" data-highlight="23-26" class="step"><h2 id="set-webhook-urls-in-a-twiml-application">Set webhook URLs in a TwiML Application</h2>
+<p>When we purchase a phone number, we specify a voice application SID. This is
+an identifier for a <a href="https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app">TwiML application</a>,
+which you can create one through the <a href="https://www.twilio.com/docs/api/rest/applications">REST API</a> 
+or <a href="https://www.twilio.com/user/account/apps">account portal</a>.</p>
+<p><img src="http://howtodocs.s3.amazonaws.com/call-tracking-twiml-app.gif" alt="Creating a TwiML app"></p>
+</div><div data-file="call_tracking/views.py" data-highlight="85-99" class="step"><h2 id="associate-a-phone-number-with-a-lead-source">Associate a phone number with a lead source</h2>
+<p>Once we search for and buy a Twilio number, we need to associate it with a
+lead source in our database. This is the core of a call tracking application.
+Any phone calls to our new Twilio number will be attributed to this source.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
@@ -108,53 +88,33 @@ the model&#39;s other fields.</p>
 <li><a href="https://en.wikipedia.org/wiki/E.164">E.164 format</a></li>
 </ul>
 </div><div data-file="call_tracking/models.py" data-highlight="22-42" class="step"><h2 id="the-leadsource-model">The LeadSource model</h2>
-<p>Our <code>LeadSource</code> model stores the numbers we purchase from Twilio in our
-database.</p>
-<p>We store the Twilio phone number in the <code>incoming_number</code> field and the
-employee&#39;s phone number in the <code>forwarding_number</code> field. We use the
-<a href="https://github.com/stefanfoulis/django-phonenumber-field">django-phonenumber-field</a>
-library here again - this time for its <code>PhoneNumberField</code> model field.</p>
-<p>To capture data about how many phone calls each <code>LeadSource</code> receives, we
-use a different model, <code>Lead</code>. Let&#39;s look at that now.</p>
+<p>The <code>LeadSource</code> model associates a Twilio number to a named lead source
+(like &quot;Wall Street Journal Ad&quot; or &quot;Dancing guy with sign&quot;). It also tracks
+a phone number to which we&#39;d like all the calls redirected, like your sales
+or support help line.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
+<li><a href="https://github.com/stefanfoulis/django-phonenumber-field">django-phonenumber-field for number formatting</a></li>
 <li><a href="https://docs.djangoproject.com/en/1.8/topics/db/models/">Django Models</a></li>
 <li><a href="https://docs.djangoproject.com/en/1.8/topics/python3/#str-and-unicode-methods">Django @python_2_unicode_compatible decorator</a></li>
 </ul>
 </div><div data-file="call_tracking/models.py" data-highlight="61-76" class="step"><h2 id="the-lead-model">The Lead model</h2>
-<p>A <code>Lead</code> represents a phone call to one of our phone numbers. Each time
-somebody calls one of our Twilio numbers, we&#39;ll use the <code>Lead</code> model to
-record some data about their call.</p>
-<p>We use a ForiegnKey field to associate each <code>Lead</code> with a <code>LeadSource</code>,
-and we again use
-<a href="https://github.com/stefanfoulis/django-phonenumber-field">django-phonenumber-field</a>&#39;s
-<code>PhoneNumberField</code> to store the caller&#39;s phone number.</p>
-<p>We also include fields for some metadata Twilio provides about incoming
-calls. City and state are just two examples -
-<a href="https://www.twilio.com/docs/api/twiml/twilio_request">check out the docs for more</a>.</p>
-<p><code>Lead</code>s are created in our <code>forward_call</code> view - let&#39;s look at that next.</p>
+<p>A <code>Lead</code> represents a phone call generated by a <code>LeadSource</code>. Each time
+somebody calls a phone number associated with a <code>LeadSource</code>, we&#39;ll use the <code>Lead</code> model to
+record some of the <a href="https://www.twilio.com/docs/api/twiml/twilio_request">data Twilio gives us</a> 
+about their call.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
 <li><a href="https://docs.djangoproject.com/en/1.8/topics/db/examples/many_to_one/">Django ForeignKey relationships</a></li>
 </ul>
-</div><div data-file="call_tracking/views.py" data-highlight="118-138" class="step"><h2 id="forward-calls-and-create-leads">Forward calls and create Leads</h2>
-<p>Our <code>forward_call</code> view is wired up to the <code>/call-tracking/forward-call</code>
-URL of our application. Whenever someone calls one of our Twilio numbers,
-Twilio will send a POST request to that URL with data about the
-incoming call.</p>
-<p>Our view&#39;s job is to to connect the caller to the correct
-<code>forwarding_number</code> and record some data about their call.</p>
-<p>We start by using the <code>Called</code> value in the POST data to determine the
-<code>LeadSource</code> for this call.</p>
-<p>We then store some data about this call by creating a new <code>Lead</code> object
-using the <code>CallerCity</code> and <code>CallerState</code> fields Twilio sent us in the
-POST data.</p>
-<p>Finally, we wrap up the response by creating some
-<a href="https://www.twilio.com/docs/api/twiml">TwiML</a> that connects our caller
-with the <code>forwarding_number</code> of our <code>LeadSource</code> using the &lt;Dial&gt; TwiML
-verb.</p>
+</div><div data-file="call_tracking/views.py" data-highlight="118-138" class="step"><h2 id="forward-calls-and-create-leads">Forward calls and create leads</h2>
+<p>Whenever a customer calls one of our Twilio numbers, Twilio will send a POST 
+request to the URL associated with this view function (should be <code>/call-tracking/forward-call</code>).</p>
+<p>We use the incoming call data to create a new <code>Lead</code> for a <code>LeadSource</code>,
+then return <a href="https://www.twilio.com/docs/api/twiml">TwiML</a> that connects our caller
+with the <code>forwarding_number</code> of our <code>LeadSource</code>.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
@@ -163,15 +123,11 @@ verb.</p>
 <li><a href="https://twilio-python.readthedocs.org/en/latest/usage/twiml.html">TwiML creation with twilio-python</a></li>
 <li><a href="https://www.twilio.com/docs/api/twiml/dial">TwiML &lt;Dial&gt; verb</a></li>
 </ul>
-</div><div data-file="call_tracking/models.py" class="step"><h2 id="get-statistics-about-our-lead-sources">Get statistics about our Lead Sources</h2>
+</div><div data-file="call_tracking/models.py" data-highlight="7-19" class="step"><h2 id="get-statistics-about-our-lead-sources">Get statistics about our lead sources</h2>
 <p>One useful statistic we can get from our data is how many calls each
-<code>LeadSource</code> has received.</p>
-<p>We use the Django ORM&#39;s annotate feature to make a list containing each
-<code>LeadSource</code> and a count of its <code>Lead</code>s.</p>
-<p>We created a custom model manager so that we can easily access this data
-in our views by calling <code>LeadSource.objects.get_leads_per_source()</code>. And
-we used the same technique to create a <code>get_leads_per_city()</code> method for
-the <code>Lead</code> model.</p>
+<code>LeadSource</code> has received. We use the Django ORM&#39;s annotate feature to make a list containing each
+<code>LeadSource</code> and a count of its <code>Lead</code> models. We create a custom model manager 
+so that we can easily access this data in our views.</p>
 <hr>
 <p><strong>See also:</strong></p>
 <ul>
@@ -180,42 +136,29 @@ the <code>Lead</code> model.</p>
 <li><a href="https://docs.djangoproject.com/en/1.8/ref/models/querysets/#values">Django queryset values() method</a></li>
 </ul>
 </div><div data-file="call_tracking/static/js/callTracking.js" class="step"><h2 id="visualize-our-statistics-with-chart-js">Visualize our statistics with Chart.js</h2>
-<p>To display our statistics on homepage, we added some pie charts using
-<a href="http://www.chartjs.org/">Chart.js</a>. This JavaScript code configures those
-charts.</p>
+<p>Back on the home page, we fetch call tracking statistics 
+<a href="https://docs.djangoproject.com/en/1.8/ref/request-response/#jsonresponse-objects">in JSON from the server</a> 
+using <a href="https://api.jquery.com/jquery.get/">jQuery</a>.
+We display the stats in colorful pie charts we create with <a href="http://www.chartjs.org/">Chart.js</a>. </p>
 <p><img src="http://howtodocs.s3.amazonaws.com/call-tracking-charts.png" alt="Call tracking charts"></p>
-<p>We first use jQuery&#39;s <code>$.get()</code> to make AJAX calls to our server and
-retrieve our data. We then loop over the data in each response and
-add it to a new array, <code>chartData</code>, in the format Chart.js expects.</p>
-<p>Then we just tell Chart.js to make new pie charts with our data
-in some divs we created in our <code>index.html</code> template.</p>
-<hr>
-<p><strong>See also:</strong></p>
-<ul>
-<li><a href="http://www.chartjs.org/docs/#doughnut-pie-chart">Chart.js pie charts</a></li>
-<li><a href="https://api.jquery.com/jquery.get/">jQuery $.get() method</a></li>
-<li><a href="https://docs.djangoproject.com/en/1.8/ref/request-response/#jsonresponse-objects">Django&#39;s JsonResponse</a></li>
-</ul>
 </div><div data-file="call_tracking/views.py" data-highlight="118-138" class="step"><h2 id="where-to-next-">Where to next?</h2>
 <p>That&#39;s it! Our Django application is now ready to purchase new phone
 numbers, forward incoming calls, and record some statistics for our
-business.</p>
-<p>If you&#39;re a Python developer working with Twilio, you might enjoy these
-other tutorials:</p>
-<p><a href="https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask"><strong>Click-to-call</strong></a>
-(Flask)</p>
+business. </p>
+<p>If you&#39;re a Python developer working with Twilio, you might also enjoy these
+tutorials:</p>
+<p><a href="https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask"><strong>Click-To-Call (Flask)</strong></a></p>
 <p>Put a button on your web page that connects visitors to live support or sales people via telephone.</p>
-<p><a href="https://www.twilio.com/docs/howto/walkthrough/appointment-reminders/python/django"><strong>Appointment Reminders</strong></a>
-(Django)</p>
+<p><a href="https://www.twilio.com/docs/howto/walkthrough/appointment-reminders/python/django"><strong>Appointment Reminders (Django)</strong></a></p>
 <p>Send your customers automatic reminders ahead of appoiments using Twilio
-SMS messaging.</p>
+SMS.</p>
 <p>Thanks for checking out this tutorial! If you have any feedback to share
 with us, we&#39;d love to hear it. Tweet <a href="https://twitter.com/twilio">@twilio</a>
 to let us know what you think.</p>
 </div></div>
-<div class="saurus-files" style="display:none;"><textarea class="saurus-file" data-file="call_tracking/views.py" data-mode="python">ZnJvbSBkamFuZ28uY29udHJpYiBpbXBvcnQgbWVzc2FnZXMKZnJvbSBkamFuZ28uY29udHJpYi5tZXNzYWdlcy52aWV3cyBpbXBvcnQgU3VjY2Vzc01lc3NhZ2VNaXhpbgpmcm9tIGRqYW5nby5jb3JlLnVybHJlc29sdmVycyBpbXBvcnQgcmV2ZXJzZV9sYXp5CmZyb20gZGphbmdvLmh0dHAgaW1wb3J0IEh0dHBSZXNwb25zZSwgSnNvblJlc3BvbnNlCmZyb20gZGphbmdvLnNob3J0Y3V0cyBpbXBvcnQgcmVuZGVyLCByZWRpcmVjdApmcm9tIGRqYW5nby50ZW1wbGF0ZS5jb250ZXh0X3Byb2Nlc3NvcnMgaW1wb3J0IGNzcmYKZnJvbSBkamFuZ28udmlld3MuZGVjb3JhdG9ycy5jc3JmIGltcG9ydCBjc3JmX2V4ZW1wdApmcm9tIGRqYW5nby52aWV3cy5nZW5lcmljLmJhc2UgaW1wb3J0IFRlbXBsYXRlVmlldwpmcm9tIGRqYW5nby52aWV3cy5nZW5lcmljLmVkaXQgaW1wb3J0IFVwZGF0ZVZpZXcKZnJvbSB0d2lsaW8gaW1wb3J0IHR3aW1sCgpmcm9tIC5mb3JtcyBpbXBvcnQgQXJlYUNvZGVGb3JtLCBQdXJjaGFzZU51bWJlckZvcm0KZnJvbSAubW9kZWxzIGltcG9ydCBMZWFkU291cmNlLCBMZWFkCmZyb20gLnV0aWxzIGltcG9ydCBzZWFyY2hfcGhvbmVfbnVtYmVycywgcHVyY2hhc2VfcGhvbmVfbnVtYmVyCgoKIyBIb21lIHBhZ2UgdmlldyBhbmQgSlNPTiB2aWV3cyB0byBwb3dlciB0aGUgY2hhcnRzCmRlZiBob21lKHJlcXVlc3QpOgogICAgIiIiUmVuZGVycyB0aGUgaG9tZSBwYWdlIiIiCiAgICBjb250ZXh0ID0ge30KCiAgICAjIEFkZCB0aGUgYXJlYSBjb2RlIGZvcm0gLSBkZWZhdWx0IHRvIDQxNQogICAgY29udGV4dFsnZm9ybSddID0gQXJlYUNvZGVGb3JtKHsnYXJlYV9jb2RlJzogJzQxNSd9KQoKICAgICMgQWRkIHRoZSBsaXN0IG9mIGxlYWQgc291cmNlcwogICAgY29udGV4dFsnbGVhZF9zb3VyY2VzJ10gPSBMZWFkU291cmNlLm9iamVjdHMuYWxsKCkKCiAgICByZXR1cm4gcmVuZGVyKHJlcXVlc3QsICdpbmRleC5odG1sJywgY29udGV4dCkKCgpkZWYgbGVhZHNfYnlfc291cmNlKHJlcXVlc3QpOgogICAgIiIiUmV0dXJucyBKU09OIGRhdGEgYWJvdXQgdGhlIGxlYWQgc291cmNlcyBhbmQgaG93IG1hbnkgbGVhZHMgdGhleSBoYXZlIiIiCiAgICAjIEludm9rZSBhIExlYWRTb3VyY2UgY2xhc3NtZXRob2QgdG8gZ2V0IHRoZSBkYXRhCiAgICBkYXRhID0gTGVhZFNvdXJjZS5vYmplY3RzLmdldF9sZWFkc19wZXJfc291cmNlKCkKCiAgICAjIFJldHVybiBpdCBhcyBKU09OIC0gdXNlIHNhZmU9RmFsc2UgYmVjYXVzZSB3ZSdyZSBzZW5kaW5nIGEgSlNPTiBhcnJheQogICAgcmV0dXJuIEpzb25SZXNwb25zZShkYXRhLCBzYWZlPUZhbHNlKQoKCmRlZiBsZWFkc19ieV9jaXR5KHJlcXVlc3QpOgogICAgIiIiUmV0dXJucyBKU09OIGRhdGEgYWJvdXQgdGhlIGRpZmZlcmVudCBjaXRpZXMgbGVhZHMgY29tZSBmcm9tIiIiCiAgICAjIEludm9rZSBhIExlYWQgY2xhc3NtZXRob2QgdG8gZ2V0IHRoZSBkYXRhCiAgICBkYXRhID0gTGVhZC5vYmplY3RzLmdldF9sZWFkc19wZXJfY2l0eSgpCgogICAgIyBSZXR1cm4gaXQgYXMgSlNPTiAtIHVzZSBzYWZlPUZhbHNlIGJlY2F1c2Ugd2UncmUgc2VuZGluZyBhIEpTT04gYXJyYXkKICAgIHJldHVybiBKc29uUmVzcG9uc2UoZGF0YSwgc2FmZT1GYWxzZSkKCgojIFZpZXdzIGZvciBwdXJjaGFzZSBudW1iZXIgd29ya2Zsb3cKZGVmIGxpc3RfbnVtYmVycyhyZXF1ZXN0KToKICAgICIiIlVzZXMgdGhlIFR3aWxpbyBBUEkgdG8gZ2VuZXJhdGUgYSBsaXN0IG9mIGF2YWlsYWJsZSBwaG9uZSBudW1iZXJzIiIiCiAgICBmb3JtID0gQXJlYUNvZGVGb3JtKHJlcXVlc3QuUE9TVCkKCiAgICBpZiBmb3JtLmlzX3ZhbGlkKCk6CiAgICAgICAgIyBXZSByZWNlaXZlZCBhIHZhbGlkIGFyZWEgY29kZSAtIHF1ZXJ5IHRoZSBUd2lsaW8gQVBJCiAgICAgICAgYXJlYV9jb2RlID0gZm9ybS5jbGVhbmVkX2RhdGFbJ2FyZWFfY29kZSddCgogICAgICAgIGF2YWlsYWJsZV9udW1iZXJzID0gc2VhcmNoX3Bob25lX251bWJlcnMoYXJlYV9jb2RlPWFyZWFfY29kZSkKCiAgICAgICAgIyBDaGVjayBpZiB0aGVyZSBhcmUgbm8gbnVtYmVycyBhdmFpbGFibGUgaW4gdGhpcyBhcmVhIGNvZGUKICAgICAgICBpZiBub3QgYXZhaWxhYmxlX251bWJlcnM6CiAgICAgICAgICAgIG1lc3NhZ2VzLmVycm9yKAogICAgICAgICAgICAgICAgcmVxdWVzdCwKICAgICAgICAgICAgICAgICdUaGVyZSBhcmUgbm8gVHdpbGlvIG51bWJlcnMgYXZhaWxhYmxlIGZvciBhcmVhIGNvZGUgezB9LiBTZWFyY2ggZm9yIG51bWJlcnMgaW4gYSBkaWZmZXJlbnQgYXJlYSBjb2RlLicuZm9ybWF0KGFyZWFfY29kZSkpCiAgICAgICAgICAgIHJldHVybiByZWRpcmVjdCgnaG9tZScpCgogICAgICAgIGNvbnRleHQgPSB7fQogICAgICAgIGNvbnRleHRbJ2F2YWlsYWJsZV9udW1iZXJzJ10gPSBhdmFpbGFibGVfbnVtYmVycwoKICAgICAgICByZXR1cm4gcmVuZGVyKHJlcXVlc3QsICdjYWxsX3RyYWNraW5nL2xpc3RfbnVtYmVycy5odG1sJywgY29udGV4dCkKICAgIGVsc2U6CiAgICAgICAgIyBPdXIgYXJlYSBjb2RlIHdhcyBpbnZhbGlkIC0gZmxhc2ggYSBtZXNzYWdlIGFuZCByZWRpcmVjdCBiYWNrIGhvbWUKICAgICAgICBiYWRfYXJlYV9jb2RlID0gZm9ybS5kYXRhWydhcmVhX2NvZGUnXQogICAgICAgIG1lc3NhZ2VzLmVycm9yKHJlcXVlc3QsICd7MH0gaXMgbm90IGEgdmFsaWQgYXJlYSBjb2RlLiBQbGVhc2Ugc2VhcmNoIGFnYWluLicKICAgICAgICAgICAgICAgICAgICAgICAuZm9ybWF0KGJhZF9hcmVhX2NvZGUpKQoKICAgICAgICByZXR1cm4gcmVkaXJlY3QoJ2hvbWUnKQoKCmRlZiBwdXJjaGFzZV9udW1iZXIocmVxdWVzdCk6CiAgICAiIiJQdXJjaGFzZXMgYSBuZXcgcGhvbmUgbnVtYmVyIHVzaW5nIHRoZSBUd2lsaW8gQVBJIiIiCiAgICBmb3JtID0gUHVyY2hhc2VOdW1iZXJGb3JtKHJlcXVlc3QuUE9TVCkKCiAgICBpZiBmb3JtLmlzX3ZhbGlkKCk6CiAgICAgICAgIyBQdXJjaGFzZSB0aGUgcGhvbmUgbnVtYmVyCiAgICAgICAgcGhvbmVfbnVtYmVyID0gZm9ybS5jbGVhbmVkX2RhdGFbJ3Bob25lX251bWJlciddCiAgICAgICAgdHdpbGlvX251bWJlciA9IHB1cmNoYXNlX3Bob25lX251bWJlcihwaG9uZV9udW1iZXIuYXNfZTE2NCkKCiAgICAgICAgIyBTYXZlIGl0IGluIGEgbmV3IExlYWRTb3VyY2Ugb2JqZWN0CiAgICAgICAgbGVhZF9zb3VyY2UgPSBMZWFkU291cmNlKGluY29taW5nX251bWJlcj10d2lsaW9fbnVtYmVyLnBob25lX251bWJlcikKICAgICAgICBsZWFkX3NvdXJjZS5zYXZlKCkKCiAgICAgICAgbWVzc2FnZXMuc3VjY2VzcygKICAgICAgICAgICAgcmVxdWVzdCwKICAgICAgICAgICAgJ1Bob25lIG51bWJlciB7MH0gaGFzIGJlZW4gcHVyY2hhc2VkLiBQbGVhc2UgYWRkIGEgbmFtZSBmb3IgdGhpcyBsZWFkIHNvdXJjZS4nLmZvcm1hdCgKICAgICAgICAgICAgICAgIHR3aWxpb19udW1iZXIuZnJpZW5kbHlfbmFtZSkpCgogICAgICAgICMgUmVkaXJlY3QgdG8gZWRpdCBsZWFkIHBhZ2UKICAgICAgICByZXR1cm4gcmVkaXJlY3QoJ2VkaXRfbGVhZF9zb3VyY2UnLCBwaz1sZWFkX3NvdXJjZS5waykKICAgIGVsc2U6CiAgICAgICAgIyBJbiB0aGUgdW5saWtlbHkgZXZlbnQgb2YgYW4gZXJyb3IsIHJlZGlyZWN0IHRvIHRoZSBob21lIHBhZ2UKICAgICAgICBiYWRfcGhvbmVfbnVtYmVyID0gZm9ybS5kYXRhWydwaG9uZV9udW1iZXInXQogICAgICAgIG1lc3NhZ2VzLmVycm9yKHJlcXVlc3QsICd7MH0gaXMgbm90IGEgdmFsaWQgcGhvbmUgbnVtYmVyLiBQbGVhc2Ugc2VhcmNoIGFnYWluLicKICAgICAgICAgICAgICAgICAgICAgICAuZm9ybWF0KGJhZF9waG9uZV9udW1iZXIpKQoKICAgICAgICByZXR1cm4gcmVkaXJlY3QoJ2hvbWUnKQoKCmNsYXNzIExlYWRTb3VyY2VVcGRhdGVWaWV3KFN1Y2Nlc3NNZXNzYWdlTWl4aW4sIFVwZGF0ZVZpZXcpOgogICAgIiIiUG93ZXJzIGEgZm9ybSB0byBlZGl0IExlYWQgU291cmNlcyIiIgoKICAgIG1vZGVsID0gTGVhZFNvdXJjZQogICAgZmllbGRzID0gWyduYW1lJywgJ2ZvcndhcmRpbmdfbnVtYmVyJ10KICAgIHN1Y2Nlc3NfdXJsID0gcmV2ZXJzZV9sYXp5KCdob21lJykKICAgIHN1Y2Nlc3NfbWVzc2FnZSA9ICdMZWFkIHNvdXJjZSBzdWNjZXNzZnVsbHkgdXBkYXRlZC4nCgoKIyBWaWV3IHVzZWQgYnkgVHdpbGlvIEFQSSB0byBjb25uZWN0IGNhbGxlcnMgdG8gdGhlIHJpZ2h0IGZvcndhcmRpbmcKIyBudW1iZXIgZm9yIHRoYXQgbGVhZCBzb3VyY2UKQGNzcmZfZXhlbXB0CmRlZiBmb3J3YXJkX2NhbGwocmVxdWVzdCk6CiAgICAiIiJDb25uZWN0cyBhbiBpbmNvbWluZyBjYWxsIHRvIHRoZSBjb3JyZWN0IGZvcndhcmRpbmcgbnVtYmVyIiIiCiAgICAjIEZpcnN0IGxvb2sgdXAgdGhlIGxlYWQgc291cmNlCiAgICBzb3VyY2UgPSBMZWFkU291cmNlLm9iamVjdHMuZ2V0KGluY29taW5nX251bWJlcj1yZXF1ZXN0LlBPU1RbJ0NhbGxlZCddKQoKICAgICMgQ3JlYXRlIGEgbGVhZCBlbnRyeSBmb3IgdGhpcyBjYWxsCiAgICBsZWFkID0gTGVhZCgKICAgICAgICBzb3VyY2U9c291cmNlLAogICAgICAgIHBob25lX251bWJlcj1yZXF1ZXN0LlBPU1RbJ0NhbGxlciddLAogICAgICAgIGNpdHk9cmVxdWVzdC5QT1NUWydDYWxsZXJDaXR5J10sCiAgICAgICAgc3RhdGU9cmVxdWVzdC5QT1NUWydDYWxsZXJTdGF0ZSddKQogICAgbGVhZC5zYXZlKCkKCiAgICAjIFJlc3BvbmQgd2l0aCBzb21lIFR3aU1MIHRoYXQgY29ubmVjdHMgdGhlIGNhbGxlciB0byB0aGUgZm9yd2FyZGluZ19udW1iZXIKICAgIHIgPSB0d2ltbC5SZXNwb25zZSgpCiAgICByLmRpYWwoc291cmNlLmZvcndhcmRpbmdfbnVtYmVyLmFzX2UxNjQpCgogICAgcmV0dXJuIEh0dHBSZXNwb25zZShyKQo=</textarea>
+<div class="saurus-files" style="display:none;"><textarea class="saurus-file" data-file="call_tracking/static/js/callTracking.js" data-mode="javascript">Ly8gUmVuZGVycyB0aGUgY2hhcnRzIG9uIHRoZSBob21lIHBhZ2UgdXNpbmcgQ2hhcnQuanMKCi8vIE1ha2UgYWxsIGNoYXJ0cyByZXNwb25zaXZlCkNoYXJ0LmRlZmF1bHRzLmdsb2JhbC5yZXNwb25zaXZlID0gdHJ1ZTsKCi8vIENvbmZpZ3VyZSB0aGUgbGVhZHNCeVNvdXJjZSBiYXIgY2hhcnQKJC5nZXQoIi9jYWxsLXRyYWNraW5nL2xlYWRzLWJ5LXNvdXJjZSIsIGZ1bmN0aW9uKGRhdGEpIHsKICB2YXIgY2hhcnREYXRhID0gW107CiAgZm9yICh2YXIgaT0wOyBpPGRhdGEubGVuZ3RoOyBpKyspIHsKICAgIGNoYXJ0RGF0YS5wdXNoKHsKICAgICAgdmFsdWU6IGRhdGFbaV1bJ2xlYWRfX2NvdW50J10sCiAgICAgIGxhYmVsOiBkYXRhW2ldWyduYW1lJ10KICAgIH0pOwogIH0KCiAgdmFyIGN0eCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJsZWFkc0J5U291cmNlIikuZ2V0Q29udGV4dCgiMmQiKTsKICB2YXIgbGVhZHNCeVNvdXJjZSA9IG5ldyBDaGFydChjdHgpLlBpZShjaGFydERhdGEpOwp9KTsKCi8vIENvbmZpZ3VyZSB0aGUgbGVhZHNCeUNpdHkgYmFyIGNoYXJ0CiQuZ2V0KCIvY2FsbC10cmFja2luZy9sZWFkcy1ieS1jaXR5IiwgZnVuY3Rpb24oZGF0YSkgewogIHZhciBjaGFydERhdGEgPSBbXTsKICBmb3IgKHZhciBpPTA7IGk8ZGF0YS5sZW5ndGg7IGkrKykgewogICAgY2hhcnREYXRhLnB1c2goewogICAgICB2YWx1ZTogZGF0YVtpXVsnaWRfX2NvdW50J10sCiAgICAgIGxhYmVsOiBkYXRhW2ldWydjaXR5J10KICAgIH0pOwogIH0KCiAgdmFyIGN0eCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJsZWFkc0J5Q2l0eSIpLmdldENvbnRleHQoIjJkIik7CiAgdmFyIGxlYWRzQnlDaXR5ID0gbmV3IENoYXJ0KGN0eCkuUGllKGNoYXJ0RGF0YSk7Cn0pOwo=</textarea>
 <textarea class="saurus-file" data-file="call_tracking/utils.py" data-mode="python">ZnJvbSBkamFuZ28uY29uZiBpbXBvcnQgc2V0dGluZ3MKZnJvbSB0d2lsaW8ucmVzdCBpbXBvcnQgVHdpbGlvUmVzdENsaWVudAoKaW1wb3J0IG9zCgojIFVzZXMgY3JlZGVudGlhbHMgZGVmaW5lZCBpbiBUV0lMSU9fQUNDT1VOVF9TSUQgYW5kIFRXSUxJT19BVVRIX1RPS0VOCiMgZW52aXJvbm1lbnQgdmFyaWFibGVzCmNsaWVudCA9IFR3aWxpb1Jlc3RDbGllbnQoKQoKCmRlZiBzZWFyY2hfcGhvbmVfbnVtYmVycyhhcmVhX2NvZGU9Tm9uZSk6CiAgICAiIiJRdWVyaWVzIHRoZSBUd2lsaW8gUkVTVCBBUEkgdG8gZ2V0IHBob25lIG51bWJlcnMgYXZhaWxhYmxlIGZvciBwdWNoYXNlIiIiCiAgICAjIFlvdSBjYW4gY2hhbmdlIHRoZSBjb3VudHJ5IGFyZ3VtZW50IHRvIHNlYXJjaCBvdXRzaWRlIHRoZSBVUwogICAgIyBhcmVhX2NvZGUgaXMgYW4gb3B0aW9uYWwgcGFyYW1ldGVyCiAgICBudW1iZXJzID0gY2xpZW50LnBob25lX251bWJlcnMuc2VhcmNoKGFyZWFfY29kZT1hcmVhX2NvZGUsIGNvdW50cnk9J1VTJykKCiAgICAjIFJldHVybnMgMzAgYnkgZGVmYXVsdCAtIGxldCdzIHRyaW0gdGhlIGxpc3QgZm9yIFVYIHB1cnBvc2VzCiAgICByZXR1cm4gbnVtYmVyc1s6MTBdCgoKZGVmIHB1cmNoYXNlX3Bob25lX251bWJlcihwaG9uZV9udW1iZXIpOgogICAgIiIiUHVyY2hhc2VzIGEgbmV3IHBob25lIG51bWJlciBmcm9tIHRoZSBUd2lsaW8gQVBJIiIiCiAgICAjIFVzZSBhIFR3aWxpbyBBcHBsaWNhdGlvbiBTSUQgc28gYWxsIG91ciBudW1iZXJzIHVzZSB0aGUgc2FtZSB2b2ljZSBVUkwKICAgIG51bWJlciA9IGNsaWVudC5waG9uZV9udW1iZXJzLnB1cmNoYXNlKAogICAgICAgIHBob25lX251bWJlcj1waG9uZV9udW1iZXIsCiAgICAgICAgdm9pY2VfYXBwbGljYXRpb25fc2lkPXNldHRpbmdzLlRXSUxJT19BUFBMSUNBVElPTl9TSUQpCgogICAgcmV0dXJuIG51bWJlcgo=</textarea>
+<textarea class="saurus-file" data-file="call_tracking/views.py" data-mode="python">ZnJvbSBkamFuZ28uY29udHJpYiBpbXBvcnQgbWVzc2FnZXMKZnJvbSBkamFuZ28uY29udHJpYi5tZXNzYWdlcy52aWV3cyBpbXBvcnQgU3VjY2Vzc01lc3NhZ2VNaXhpbgpmcm9tIGRqYW5nby5jb3JlLnVybHJlc29sdmVycyBpbXBvcnQgcmV2ZXJzZV9sYXp5CmZyb20gZGphbmdvLmh0dHAgaW1wb3J0IEh0dHBSZXNwb25zZSwgSnNvblJlc3BvbnNlCmZyb20gZGphbmdvLnNob3J0Y3V0cyBpbXBvcnQgcmVuZGVyLCByZWRpcmVjdApmcm9tIGRqYW5nby50ZW1wbGF0ZS5jb250ZXh0X3Byb2Nlc3NvcnMgaW1wb3J0IGNzcmYKZnJvbSBkamFuZ28udmlld3MuZGVjb3JhdG9ycy5jc3JmIGltcG9ydCBjc3JmX2V4ZW1wdApmcm9tIGRqYW5nby52aWV3cy5nZW5lcmljLmJhc2UgaW1wb3J0IFRlbXBsYXRlVmlldwpmcm9tIGRqYW5nby52aWV3cy5nZW5lcmljLmVkaXQgaW1wb3J0IFVwZGF0ZVZpZXcKZnJvbSB0d2lsaW8gaW1wb3J0IHR3aW1sCgpmcm9tIC5mb3JtcyBpbXBvcnQgQXJlYUNvZGVGb3JtLCBQdXJjaGFzZU51bWJlckZvcm0KZnJvbSAubW9kZWxzIGltcG9ydCBMZWFkU291cmNlLCBMZWFkCmZyb20gLnV0aWxzIGltcG9ydCBzZWFyY2hfcGhvbmVfbnVtYmVycywgcHVyY2hhc2VfcGhvbmVfbnVtYmVyCgoKIyBIb21lIHBhZ2UgdmlldyBhbmQgSlNPTiB2aWV3cyB0byBwb3dlciB0aGUgY2hhcnRzCmRlZiBob21lKHJlcXVlc3QpOgogICAgIiIiUmVuZGVycyB0aGUgaG9tZSBwYWdlIiIiCiAgICBjb250ZXh0ID0ge30KCiAgICAjIEFkZCB0aGUgYXJlYSBjb2RlIGZvcm0gLSBkZWZhdWx0IHRvIDQxNQogICAgY29udGV4dFsnZm9ybSddID0gQXJlYUNvZGVGb3JtKHsnYXJlYV9jb2RlJzogJzQxNSd9KQoKICAgICMgQWRkIHRoZSBsaXN0IG9mIGxlYWQgc291cmNlcwogICAgY29udGV4dFsnbGVhZF9zb3VyY2VzJ10gPSBMZWFkU291cmNlLm9iamVjdHMuYWxsKCkKCiAgICByZXR1cm4gcmVuZGVyKHJlcXVlc3QsICdpbmRleC5odG1sJywgY29udGV4dCkKCgpkZWYgbGVhZHNfYnlfc291cmNlKHJlcXVlc3QpOgogICAgIiIiUmV0dXJucyBKU09OIGRhdGEgYWJvdXQgdGhlIGxlYWQgc291cmNlcyBhbmQgaG93IG1hbnkgbGVhZHMgdGhleSBoYXZlIiIiCiAgICAjIEludm9rZSBhIExlYWRTb3VyY2UgY2xhc3NtZXRob2QgdG8gZ2V0IHRoZSBkYXRhCiAgICBkYXRhID0gTGVhZFNvdXJjZS5vYmplY3RzLmdldF9sZWFkc19wZXJfc291cmNlKCkKCiAgICAjIFJldHVybiBpdCBhcyBKU09OIC0gdXNlIHNhZmU9RmFsc2UgYmVjYXVzZSB3ZSdyZSBzZW5kaW5nIGEgSlNPTiBhcnJheQogICAgcmV0dXJuIEpzb25SZXNwb25zZShkYXRhLCBzYWZlPUZhbHNlKQoKCmRlZiBsZWFkc19ieV9jaXR5KHJlcXVlc3QpOgogICAgIiIiUmV0dXJucyBKU09OIGRhdGEgYWJvdXQgdGhlIGRpZmZlcmVudCBjaXRpZXMgbGVhZHMgY29tZSBmcm9tIiIiCiAgICAjIEludm9rZSBhIExlYWQgY2xhc3NtZXRob2QgdG8gZ2V0IHRoZSBkYXRhCiAgICBkYXRhID0gTGVhZC5vYmplY3RzLmdldF9sZWFkc19wZXJfY2l0eSgpCgogICAgIyBSZXR1cm4gaXQgYXMgSlNPTiAtIHVzZSBzYWZlPUZhbHNlIGJlY2F1c2Ugd2UncmUgc2VuZGluZyBhIEpTT04gYXJyYXkKICAgIHJldHVybiBKc29uUmVzcG9uc2UoZGF0YSwgc2FmZT1GYWxzZSkKCgojIFZpZXdzIGZvciBwdXJjaGFzZSBudW1iZXIgd29ya2Zsb3cKZGVmIGxpc3RfbnVtYmVycyhyZXF1ZXN0KToKICAgICIiIlVzZXMgdGhlIFR3aWxpbyBBUEkgdG8gZ2VuZXJhdGUgYSBsaXN0IG9mIGF2YWlsYWJsZSBwaG9uZSBudW1iZXJzIiIiCiAgICBmb3JtID0gQXJlYUNvZGVGb3JtKHJlcXVlc3QuUE9TVCkKCiAgICBpZiBmb3JtLmlzX3ZhbGlkKCk6CiAgICAgICAgIyBXZSByZWNlaXZlZCBhIHZhbGlkIGFyZWEgY29kZSAtIHF1ZXJ5IHRoZSBUd2lsaW8gQVBJCiAgICAgICAgYXJlYV9jb2RlID0gZm9ybS5jbGVhbmVkX2RhdGFbJ2FyZWFfY29kZSddCgogICAgICAgIGF2YWlsYWJsZV9udW1iZXJzID0gc2VhcmNoX3Bob25lX251bWJlcnMoYXJlYV9jb2RlPWFyZWFfY29kZSkKCiAgICAgICAgIyBDaGVjayBpZiB0aGVyZSBhcmUgbm8gbnVtYmVycyBhdmFpbGFibGUgaW4gdGhpcyBhcmVhIGNvZGUKICAgICAgICBpZiBub3QgYXZhaWxhYmxlX251bWJlcnM6CiAgICAgICAgICAgIG1lc3NhZ2VzLmVycm9yKAogICAgICAgICAgICAgICAgcmVxdWVzdCwKICAgICAgICAgICAgICAgICdUaGVyZSBhcmUgbm8gVHdpbGlvIG51bWJlcnMgYXZhaWxhYmxlIGZvciBhcmVhIGNvZGUgezB9LiBTZWFyY2ggZm9yIG51bWJlcnMgaW4gYSBkaWZmZXJlbnQgYXJlYSBjb2RlLicuZm9ybWF0KGFyZWFfY29kZSkpCiAgICAgICAgICAgIHJldHVybiByZWRpcmVjdCgnaG9tZScpCgogICAgICAgIGNvbnRleHQgPSB7fQogICAgICAgIGNvbnRleHRbJ2F2YWlsYWJsZV9udW1iZXJzJ10gPSBhdmFpbGFibGVfbnVtYmVycwoKICAgICAgICByZXR1cm4gcmVuZGVyKHJlcXVlc3QsICdjYWxsX3RyYWNraW5nL2xpc3RfbnVtYmVycy5odG1sJywgY29udGV4dCkKICAgIGVsc2U6CiAgICAgICAgIyBPdXIgYXJlYSBjb2RlIHdhcyBpbnZhbGlkIC0gZmxhc2ggYSBtZXNzYWdlIGFuZCByZWRpcmVjdCBiYWNrIGhvbWUKICAgICAgICBiYWRfYXJlYV9jb2RlID0gZm9ybS5kYXRhWydhcmVhX2NvZGUnXQogICAgICAgIG1lc3NhZ2VzLmVycm9yKHJlcXVlc3QsICd7MH0gaXMgbm90IGEgdmFsaWQgYXJlYSBjb2RlLiBQbGVhc2Ugc2VhcmNoIGFnYWluLicKICAgICAgICAgICAgICAgICAgICAgICAuZm9ybWF0KGJhZF9hcmVhX2NvZGUpKQoKICAgICAgICByZXR1cm4gcmVkaXJlY3QoJ2hvbWUnKQoKCmRlZiBwdXJjaGFzZV9udW1iZXIocmVxdWVzdCk6CiAgICAiIiJQdXJjaGFzZXMgYSBuZXcgcGhvbmUgbnVtYmVyIHVzaW5nIHRoZSBUd2lsaW8gQVBJIiIiCiAgICBmb3JtID0gUHVyY2hhc2VOdW1iZXJGb3JtKHJlcXVlc3QuUE9TVCkKCiAgICBpZiBmb3JtLmlzX3ZhbGlkKCk6CiAgICAgICAgIyBQdXJjaGFzZSB0aGUgcGhvbmUgbnVtYmVyCiAgICAgICAgcGhvbmVfbnVtYmVyID0gZm9ybS5jbGVhbmVkX2RhdGFbJ3Bob25lX251bWJlciddCiAgICAgICAgdHdpbGlvX251bWJlciA9IHB1cmNoYXNlX3Bob25lX251bWJlcihwaG9uZV9udW1iZXIuYXNfZTE2NCkKCiAgICAgICAgIyBTYXZlIGl0IGluIGEgbmV3IExlYWRTb3VyY2Ugb2JqZWN0CiAgICAgICAgbGVhZF9zb3VyY2UgPSBMZWFkU291cmNlKGluY29taW5nX251bWJlcj10d2lsaW9fbnVtYmVyLnBob25lX251bWJlcikKICAgICAgICBsZWFkX3NvdXJjZS5zYXZlKCkKCiAgICAgICAgbWVzc2FnZXMuc3VjY2VzcygKICAgICAgICAgICAgcmVxdWVzdCwKICAgICAgICAgICAgJ1Bob25lIG51bWJlciB7MH0gaGFzIGJlZW4gcHVyY2hhc2VkLiBQbGVhc2UgYWRkIGEgbmFtZSBmb3IgdGhpcyBsZWFkIHNvdXJjZS4nLmZvcm1hdCgKICAgICAgICAgICAgICAgIHR3aWxpb19udW1iZXIuZnJpZW5kbHlfbmFtZSkpCgogICAgICAgICMgUmVkaXJlY3QgdG8gZWRpdCBsZWFkIHBhZ2UKICAgICAgICByZXR1cm4gcmVkaXJlY3QoJ2VkaXRfbGVhZF9zb3VyY2UnLCBwaz1sZWFkX3NvdXJjZS5waykKICAgIGVsc2U6CiAgICAgICAgIyBJbiB0aGUgdW5saWtlbHkgZXZlbnQgb2YgYW4gZXJyb3IsIHJlZGlyZWN0IHRvIHRoZSBob21lIHBhZ2UKICAgICAgICBiYWRfcGhvbmVfbnVtYmVyID0gZm9ybS5kYXRhWydwaG9uZV9udW1iZXInXQogICAgICAgIG1lc3NhZ2VzLmVycm9yKHJlcXVlc3QsICd7MH0gaXMgbm90IGEgdmFsaWQgcGhvbmUgbnVtYmVyLiBQbGVhc2Ugc2VhcmNoIGFnYWluLicKICAgICAgICAgICAgICAgICAgICAgICAuZm9ybWF0KGJhZF9waG9uZV9udW1iZXIpKQoKICAgICAgICByZXR1cm4gcmVkaXJlY3QoJ2hvbWUnKQoKCmNsYXNzIExlYWRTb3VyY2VVcGRhdGVWaWV3KFN1Y2Nlc3NNZXNzYWdlTWl4aW4sIFVwZGF0ZVZpZXcpOgogICAgIiIiUG93ZXJzIGEgZm9ybSB0byBlZGl0IExlYWQgU291cmNlcyIiIgoKICAgIG1vZGVsID0gTGVhZFNvdXJjZQogICAgZmllbGRzID0gWyduYW1lJywgJ2ZvcndhcmRpbmdfbnVtYmVyJ10KICAgIHN1Y2Nlc3NfdXJsID0gcmV2ZXJzZV9sYXp5KCdob21lJykKICAgIHN1Y2Nlc3NfbWVzc2FnZSA9ICdMZWFkIHNvdXJjZSBzdWNjZXNzZnVsbHkgdXBkYXRlZC4nCgoKIyBWaWV3IHVzZWQgYnkgVHdpbGlvIEFQSSB0byBjb25uZWN0IGNhbGxlcnMgdG8gdGhlIHJpZ2h0IGZvcndhcmRpbmcKIyBudW1iZXIgZm9yIHRoYXQgbGVhZCBzb3VyY2UKQGNzcmZfZXhlbXB0CmRlZiBmb3J3YXJkX2NhbGwocmVxdWVzdCk6CiAgICAiIiJDb25uZWN0cyBhbiBpbmNvbWluZyBjYWxsIHRvIHRoZSBjb3JyZWN0IGZvcndhcmRpbmcgbnVtYmVyIiIiCiAgICAjIEZpcnN0IGxvb2sgdXAgdGhlIGxlYWQgc291cmNlCiAgICBzb3VyY2UgPSBMZWFkU291cmNlLm9iamVjdHMuZ2V0KGluY29taW5nX251bWJlcj1yZXF1ZXN0LlBPU1RbJ0NhbGxlZCddKQoKICAgICMgQ3JlYXRlIGEgbGVhZCBlbnRyeSBmb3IgdGhpcyBjYWxsCiAgICBsZWFkID0gTGVhZCgKICAgICAgICBzb3VyY2U9c291cmNlLAogICAgICAgIHBob25lX251bWJlcj1yZXF1ZXN0LlBPU1RbJ0NhbGxlciddLAogICAgICAgIGNpdHk9cmVxdWVzdC5QT1NUWydDYWxsZXJDaXR5J10sCiAgICAgICAgc3RhdGU9cmVxdWVzdC5QT1NUWydDYWxsZXJTdGF0ZSddKQogICAgbGVhZC5zYXZlKCkKCiAgICAjIFJlc3BvbmQgd2l0aCBzb21lIFR3aU1MIHRoYXQgY29ubmVjdHMgdGhlIGNhbGxlciB0byB0aGUgZm9yd2FyZGluZ19udW1iZXIKICAgIHIgPSB0d2ltbC5SZXNwb25zZSgpCiAgICByLmRpYWwoc291cmNlLmZvcndhcmRpbmdfbnVtYmVyLmFzX2UxNjQpCgogICAgcmV0dXJuIEh0dHBSZXNwb25zZShyKQo=</textarea>
 <textarea class="saurus-file" data-file="call_tracking/models.py" data-mode="python">ZnJvbSBkamFuZ28uZGIgaW1wb3J0IG1vZGVscwpmcm9tIGRqYW5nby5kYi5tb2RlbHMgaW1wb3J0IENvdW50CmZyb20gZGphbmdvLnV0aWxzLmVuY29kaW5nIGltcG9ydCBweXRob25fMl91bmljb2RlX2NvbXBhdGlibGUKZnJvbSBwaG9uZW51bWJlcl9maWVsZC5tb2RlbGZpZWxkcyBpbXBvcnQgUGhvbmVOdW1iZXJGaWVsZAoKCmNsYXNzIExlYWRTb3VyY2VNYW5hZ2VyKG1vZGVscy5NYW5hZ2VyKToKICAgICIiIkEgY3VzdG9tIG1hbmFnZXIgd2hpY2ggYWRkcyBhICdnZXRfbGVhZHNfcGVyX3NvdXJjZScgbWV0aG9kIiIiCgogICAgZGVmIGdldF9sZWFkc19wZXJfc291cmNlKHNlbGYpOgogICAgICAgICIiIkdldCB0aGUgbnVtYmVyIG9mIGxlYWRzIGZvciBlYWNoIGxlYWQgc291cmNlIiIiCiAgICAgICAgIyBVc2UgRGphbmdvJ3MgYW5ub3RhdGUgZmVhdHVyZSB0byBpbmNsdWRlIHRoZSBudW1iZXIgb2YgbGVhZHMKICAgICAgICAjIG9uIGVhY2ggbGVhZCBzb3VyY2UKICAgICAgICBxdWVyeXNldCA9IHNlbGYuYWxsKCkuYW5ub3RhdGUoQ291bnQoJ2xlYWQnKSkub3JkZXJfYnkoJ25hbWUnKQoKICAgICAgICAjIEV4dHJhY3QgdGhlIHNvdXJjZSBuYW1lcyBhbmQgbGVhZCBjb3VudHMgYW5kIG1ha2UgdGhlbSBhIHJlZ3VsYXIgbGlzdAogICAgICAgIGRhdGEgPSBsaXN0KHF1ZXJ5c2V0LnZhbHVlcygnbmFtZScsICdsZWFkX19jb3VudCcpKQoKICAgICAgICByZXR1cm4gZGF0YQoKCkBweXRob25fMl91bmljb2RlX2NvbXBhdGlibGUKY2xhc3MgTGVhZFNvdXJjZShtb2RlbHMuTW9kZWwpOgogICAgbmFtZSA9IG1vZGVscy5DaGFyRmllbGQoCiAgICAgICAgbWF4X2xlbmd0aD0xMDAsCiAgICAgICAgYmxhbms9VHJ1ZSwKICAgICAgICBoZWxwX3RleHQ9J0UuZy4gIkRvd250b3duIGJpbGxib2FyZCInKQogICAgaW5jb21pbmdfbnVtYmVyID0gUGhvbmVOdW1iZXJGaWVsZCgKICAgICAgICB1bmlxdWU9VHJ1ZSwKICAgICAgICBoZWxwX3RleHQ9J0EgcGhvbmUgbnVtYmVyIHB1cmNoYXNlZCB0aHJvdWdoIFR3aWxpbycpCiAgICBmb3J3YXJkaW5nX251bWJlciA9IFBob25lTnVtYmVyRmllbGQoCiAgICAgICAgYmxhbms9VHJ1ZSwKICAgICAgICBoZWxwX3RleHQ9J1Blb3BsZSB3aG8gY2FsbCB0aGlzIGxlYWQgc291cmNlIHdpbGwgYmUgY29ubmVjdGVkIHdpdGggdGhpcyBwaG9uZSBudW1iZXIuIE11c3QgaW5jbHVkZSBpbnRlcm5hdGlvbmFsIHByZWZpeCAtIGUuZy4gKzEgNTU1IDU1NSA1NTU1NScpCgogICAgIyBBcHBseSBvdXIgY3VzdG9tIG1hbmFnZXIKICAgIG9iamVjdHMgPSBMZWFkU291cmNlTWFuYWdlcigpCgogICAgZGVmIF9fc3RyX18oc2VsZik6CiAgICAgICAgaWYgc2VsZi5uYW1lOgogICAgICAgICAgICByZXR1cm4gJ3swfSAtIHsxfScuZm9ybWF0KHNlbGYubmFtZSwgc2VsZi5pbmNvbWluZ19udW1iZXIpCiAgICAgICAgZWxzZToKICAgICAgICAgICAgcmV0dXJuICcobm90IHlldCBuYW1lZCkgLSB7MH0nLmZvcm1hdChzZWxmLmluY29taW5nX251bWJlcikKCgpjbGFzcyBMZWFkTWFuYWdlcihtb2RlbHMuTWFuYWdlcik6CiAgICAiIiJBIGN1c3RvbSBtYW5hZ2VyIHdoaWNoIGFkZHMgYSAnZ2V0X2xlYWRzX3Blcl9jaXR5JyBtZXRob2QiIiIKCiAgICBkZWYgZ2V0X2xlYWRzX3Blcl9jaXR5KHNlbGYpOgogICAgICAgICIiIkdldCB0aGUgbnVtYmVyIG9mIGxlYWRzIGZvciBlYWNoIGNpdHkiIiIKICAgICAgICAjIFVzZSBEamFuZ28ncyBhbm5vdGF0ZSBmZWF0dXJlIHRvIGluY2x1ZGUgdGhlIG51bWJlciBvZiBsZWFkcwogICAgICAgICMgZnJvbSBlYWNoIGRpc3RpbmN0IGNpdHkKICAgICAgICBxdWVyeXNldCA9IHNlbGYuYWxsKCkudmFsdWVzKCdjaXR5JykuYW5ub3RhdGUoCiAgICAgICAgICAgIENvdW50KCdpZCcpKS5vcmRlcl9ieSgnY2l0eScpCgogICAgICAgICMgRXh0cmFjdCB0aGUgY2l0aWVzIGFuZCBsZWFkIGNvdW50cyBhbmQgbWFrZSB0aGVtIGEgcmVndWxhciBsaXN0CiAgICAgICAgZGF0YSA9IGxpc3QocXVlcnlzZXQudmFsdWVzKCdjaXR5JywgJ2lkX19jb3VudCcpKQoKICAgICAgICByZXR1cm4gZGF0YQoKCkBweXRob25fMl91bmljb2RlX2NvbXBhdGlibGUKY2xhc3MgTGVhZChtb2RlbHMuTW9kZWwpOgogICAgc291cmNlID0gbW9kZWxzLkZvcmVpZ25LZXkoTGVhZFNvdXJjZSkKICAgIHBob25lX251bWJlciA9IFBob25lTnVtYmVyRmllbGQoKQogICAgdGltZXN0YW1wID0gbW9kZWxzLkRhdGVUaW1lRmllbGQoYXV0b19ub3dfYWRkPVRydWUpCgogICAgIyBBIGNvdXBsZSBleGFtcGxlcyBvZiBmaWVsZHMgeW91IGNvdWxkIHRyYWNrIGZvciBlYWNoIGluY29taW5nIGNhbGwKICAgICMgU2VlIGh0dHBzOi8vd3d3LnR3aWxpby5jb20vZG9jcy9hcGkvdHdpbWwvdHdpbGlvX3JlcXVlc3QgZm9yIG1vcmUKICAgIGNpdHkgPSBtb2RlbHMuQ2hhckZpZWxkKG1heF9sZW5ndGg9MTAwKQogICAgc3RhdGUgPSBtb2RlbHMuQ2hhckZpZWxkKG1heF9sZW5ndGg9MikKCiAgICAjIEFwcGx5IG91ciBjdXN0b20gbWFuYWdlcgogICAgb2JqZWN0cyA9IExlYWRNYW5hZ2VyKCkKCiAgICBkZWYgX19zdHJfXyhzZWxmKToKICAgICAgICByZXR1cm4gJ3swfSwgezF9IGF0IHsyfScuZm9ybWF0KHNlbGYuY2l0eSwgc2VsZi5zdGF0ZSwgc2VsZi50aW1lc3RhbXApCg==</textarea>
-<textarea class="saurus-file" data-file="call_tracking/static/js/callTracking.js" data-mode="javascript">Ly8gUmVuZGVycyB0aGUgY2hhcnRzIG9uIHRoZSBob21lIHBhZ2UgdXNpbmcgQ2hhcnQuanMKCi8vIE1ha2UgYWxsIGNoYXJ0cyByZXNwb25zaXZlCkNoYXJ0LmRlZmF1bHRzLmdsb2JhbC5yZXNwb25zaXZlID0gdHJ1ZTsKCi8vIENvbmZpZ3VyZSB0aGUgbGVhZHNCeVNvdXJjZSBiYXIgY2hhcnQKJC5nZXQoIi9jYWxsLXRyYWNraW5nL2xlYWRzLWJ5LXNvdXJjZSIsIGZ1bmN0aW9uKGRhdGEpIHsKICB2YXIgY2hhcnREYXRhID0gW107CiAgZm9yICh2YXIgaT0wOyBpPGRhdGEubGVuZ3RoOyBpKyspIHsKICAgIGNoYXJ0RGF0YS5wdXNoKHsKICAgICAgdmFsdWU6IGRhdGFbaV1bJ2xlYWRfX2NvdW50J10sCiAgICAgIGxhYmVsOiBkYXRhW2ldWyduYW1lJ10KICAgIH0pOwogIH0KCiAgdmFyIGN0eCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJsZWFkc0J5U291cmNlIikuZ2V0Q29udGV4dCgiMmQiKTsKICB2YXIgbGVhZHNCeVNvdXJjZSA9IG5ldyBDaGFydChjdHgpLlBpZShjaGFydERhdGEpOwp9KTsKCi8vIENvbmZpZ3VyZSB0aGUgbGVhZHNCeUNpdHkgYmFyIGNoYXJ0CiQuZ2V0KCIvY2FsbC10cmFja2luZy9sZWFkcy1ieS1jaXR5IiwgZnVuY3Rpb24oZGF0YSkgewogIHZhciBjaGFydERhdGEgPSBbXTsKICBmb3IgKHZhciBpPTA7IGk8ZGF0YS5sZW5ndGg7IGkrKykgewogICAgY2hhcnREYXRhLnB1c2goewogICAgICB2YWx1ZTogZGF0YVtpXVsnaWRfX2NvdW50J10sCiAgICAgIGxhYmVsOiBkYXRhW2ldWydjaXR5J10KICAgIH0pOwogIH0KCiAgdmFyIGN0eCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJsZWFkc0J5Q2l0eSIpLmdldENvbnRleHQoIjJkIik7CiAgdmFyIGxlYWRzQnlDaXR5ID0gbmV3IENoYXJ0KGN0eCkuUGllKGNoYXJ0RGF0YSk7Cn0pOwo=</textarea>
 </div>
 </div><div class="saurus-overview"><ul></ul></div></div><div class="saurus-code"><div class="file-path"><span class="crumb-container"></span><i class="fa fa-fw fa-folder"></i></div><div class="saurus-editor"></div></div><div class="saurus-explorer"><div class="saurus-file-list"></div><a href="https://github.com/TwilioDevEd/call-tracking-django" target="_blank" class="explorer-get-code"> <i class="fa fa-lg fa-github-square"> </i>View Code on GitHub</a></div></div></div></div><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script><script src="ace/ace.js"></script><script src="ace/theme-monokai.js"></script><script src="viewsaurus.js"></script></body></html>

@@ -1,5 +1,5 @@
 .chapter(data-title='Call Tracking with Twilio and Django')
-  .step(data-file='call_tracking/views.py', data-highlight='118-138')
+  .step(data-file='call_tracking/static/js/callTracking.js')
     :markdown
       ## What does this thing do?
 
@@ -37,42 +37,28 @@
     :markdown
       ## Search for available phone numbers
 
-      Before users can do anything with our app, they have to find an available
-      Twilio phone number to purchase. We can search for a number using the
-      Twilio REST API.
-
-      Using the twilio-python helper library, we first create a `TwilioRestClient`
-      in a `utils.py` module. `TwilioRestClient` looks for environment variables
-      to find its credentials.
-
-      Once we've got our `client` ready, searching for available phone numbers
-      is as easy as `phone_numbers.search()`. Twilio will return a list
-      of phone numbers for our user to choose from.
-
-      Let's look at the Django view which calls this code next.
+      Call tracking requires us to search for and buy phone numbers on demand,
+      associating a specific phone number with a lead source. This utility module
+      uses the [twilio-python helper library](https://twilio-python.readthedocs.org/en/latest/usage/basics.html)
+      to search for phone numbers by area code and return a list of numbers
+      that are available for purchase.
 
       ---
 
       **See also:**
 
-      * [Accessing REST resources with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/basics.html)
-      * [Searching and Buying a Number with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/phone-numbers.html#searching-and-buying-a-number)
-      * [Twilio REST API: Available Phone Numbers](https://www.twilio.com/docs/api/rest/available-phone-numbers)
+      * [twilio-python helper library basics](https://twilio-python.readthedocs.org/en/latest/usage/basics.html)
+      * [Searching for and buying numbers in twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/phone-numbers.html#searching-and-buying-a-number)
+      * [REST API: Available Phone Numbers](https://www.twilio.com/docs/api/rest/available-phone-numbers)
 
-  .step(data-file='call_tracking/views.py', data-highlight='49-77')
+  .step(data-file='call_tracking/views.py', data-highlight='55-70')
     :markdown
-      ## List phone numbers view
+      ## Display available phone numbers
 
-      When searching for a phone number, our users can optionally specify an
-      area code. Our `list_numbers` view starts off validating that input with
-      a one-field form called `AreaCodeForm`.
-
-      We then call our `search_phone_numbers` function from the previous step
-      to retrieve a list of available numbers. If that list comes back empty
-      we redirect the user back home and tell them to try a different area code.
-
-      Otherwise we use those numbers to render the `list_numbers.html` template,
-      which is where our users will choose which number they want to purchase.
+      We display a form to the user on the app's home page which allows them to
+      search for a new phone number by area code. At the view level, we use the
+      utility module we created earlier to actually search for numbers, and display
+      and HTML page to the user with a list of numbers they can choose to buy.
 
       ---
 
@@ -81,27 +67,13 @@
       * [Django forms overview](https://docs.djangoproject.com/en/1.8/topics/forms/)
       * [Django messages framework](https://docs.djangoproject.com/en/1.8/ref/contrib/messages/)
 
-  .step(data-file='call_tracking/utils.py')
+  .step(data-file='call_tracking/utils.py', data-highlight='21-28')
     :markdown
-      ## Purchase a phone number
+      ## Buy a phone number
 
       Our `purchase_phone_number` utility function takes a phone number as its
-      sole parameter and uses our Twilio API client to make the purchase.
-
-      We also pass an extra argument to our `phone_numbers.purchase()` call for
-      `voice_application_sid`. This lets us configure the new number to use
-      a TwiML app for its Voice URL.
-
-      TwiML apps let us apply the same URL configuration across all numbers we
-      purchase. They're really handy for applications like ours, where we want
-      calls to each of our numbers to use the same Voice URL on our server.
-
-      To run our application yourself, you'll need to [create your own TwiML app
-      first](https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app).
-
-      ![Creating a TwiML app](http://howtodocs.s3.amazonaws.com/call-tracking-twiml-app.gif)
-
-      We'll look at the view which calls this function next.
+      sole parameter and uses our Twilio API client to actually purchase one of
+      the available phone numbers we searched for earlier.
 
       ---
 
@@ -110,24 +82,24 @@
       * [Searching and Buying a Number with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/phone-numbers.html#searching-and-buying-a-number)
       * [Twilio REST API: Available Phone Numbers](https://www.twilio.com/docs/api/rest/available-phone-numbers)
 
-  .step(data-file='call_tracking/views.py', data-highlight='80-106')
+  .step(data-file='call_tracking/utils.py', data-highlight='23-26')
     :markdown
-      ## Purchase phone number view
+      ## Set webhook URLs in a TwiML Application
 
-      Our `purchase_number` view starts off sanitizing our POST data again, this
-      time using a form called `PurchaseNumberForm`.
+      When we purchase a phone number, we specify a voice application SID. This is
+      an identifier for a [TwiML application](https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app),
+      which you can create one through the [REST API](https://www.twilio.com/docs/api/rest/applications) 
+      or [account portal](https://www.twilio.com/user/account/apps).
 
-      The `phone_number` field on that form is a third-party field from the
-      [django-phonenumber-field](https://github.com/stefanfoulis/django-phonenumber-field)
-      library. Our purchase function expects its phone number
-      argument to look like `+155555555555`, so we need to use the form field's
-      `.as_e164` property to get the right format.
+      ![Creating a TwiML app](http://howtodocs.s3.amazonaws.com/call-tracking-twiml-app.gif)
 
-      After the number has been purchased, we save it in a new instance of our
-      `LeadSource` model and redirect our user to a page where they can fill in
-      the model's other fields.
+  .step(data-file='call_tracking/views.py', data-highlight='85-99')
+    :markdown
+      ## Associate a phone number with a lead source
 
-      Let's take a look at those other fields now.
+      Once we search for and buy a Twilio number, we need to associate it with a
+      lead source in our database. This is the core of a call tracking application.
+      Any phone calls to our new Twilio number will be attributed to this source.
 
       ---
 
@@ -142,21 +114,16 @@
     :markdown
       ## The LeadSource model
 
-      Our `LeadSource` model stores the numbers we purchase from Twilio in our
-      database.
-
-      We store the Twilio phone number in the `incoming_number` field and the
-      employee's phone number in the `forwarding_number` field. We use the
-      [django-phonenumber-field](https://github.com/stefanfoulis/django-phonenumber-field)
-      library here again - this time for its `PhoneNumberField` model field.
-
-      To capture data about how many phone calls each `LeadSource` receives, we
-      use a different model, `Lead`. Let's look at that now.
+      The `LeadSource` model associates a Twilio number to a named lead source
+      (like "Wall Street Journal Ad" or "Dancing guy with sign"). It also tracks
+      a phone number to which we'd like all the calls redirected, like your sales
+      or support help line.
 
       ---
 
       **See also:**
 
+      * [django-phonenumber-field for number formatting](https://github.com/stefanfoulis/django-phonenumber-field)
       * [Django Models](https://docs.djangoproject.com/en/1.8/topics/db/models/)
       * [Django @python_2_unicode_compatible decorator](https://docs.djangoproject.com/en/1.8/topics/python3/#str-and-unicode-methods)
 
@@ -164,20 +131,10 @@
     :markdown
       ## The Lead model
 
-      A `Lead` represents a phone call to one of our phone numbers. Each time
-      somebody calls one of our Twilio numbers, we'll use the `Lead` model to
-      record some data about their call.
-
-      We use a ForiegnKey field to associate each `Lead` with a `LeadSource`,
-      and we again use
-      [django-phonenumber-field](https://github.com/stefanfoulis/django-phonenumber-field)'s
-      `PhoneNumberField` to store the caller's phone number.
-
-      We also include fields for some metadata Twilio provides about incoming
-      calls. City and state are just two examples -
-      [check out the docs for more](https://www.twilio.com/docs/api/twiml/twilio_request).
-
-      `Lead`s are created in our `forward_call` view - let's look at that next.
+      A `Lead` represents a phone call generated by a `LeadSource`. Each time
+      somebody calls a phone number associated with a `LeadSource`, we'll use the `Lead` model to
+      record some of the [data Twilio gives us](https://www.twilio.com/docs/api/twiml/twilio_request) 
+      about their call.
 
       ---
 
@@ -187,27 +144,14 @@
 
   .step(data-file='call_tracking/views.py', data-highlight='118-138')
     :markdown
-      ## Forward calls and create Leads
+      ## Forward calls and create leads
 
-      Our `forward_call` view is wired up to the `/call-tracking/forward-call`
-      URL of our application. Whenever someone calls one of our Twilio numbers,
-      Twilio will send a POST request to that URL with data about the
-      incoming call.
+      Whenever a customer calls one of our Twilio numbers, Twilio will send a POST 
+      request to the URL associated with this view function (should be `/call-tracking/forward-call`).
 
-      Our view's job is to to connect the caller to the correct
-      `forwarding_number` and record some data about their call.
-
-      We start by using the `Called` value in the POST data to determine the
-      `LeadSource` for this call.
-
-      We then store some data about this call by creating a new `Lead` object
-      using the `CallerCity` and `CallerState` fields Twilio sent us in the
-      POST data.
-
-      Finally, we wrap up the response by creating some
-      [TwiML](https://www.twilio.com/docs/api/twiml) that connects our caller
-      with the `forwarding_number` of our `LeadSource` using the <Dial> TwiML
-      verb.
+      We use the incoming call data to create a new `Lead` for a `LeadSource`,
+      then return [TwiML](https://www.twilio.com/docs/api/twiml) that connects our caller
+      with the `forwarding_number` of our `LeadSource`.
 
       ---
 
@@ -218,20 +162,14 @@
       * [TwiML creation with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/twiml.html)
       * [TwiML <Dial> verb](https://www.twilio.com/docs/api/twiml/dial)
 
-  .step(data-file='call_tracking/models.py')
+  .step(data-file='call_tracking/models.py', data-highlight='7-19')
     :markdown
-      ## Get statistics about our Lead Sources
+      ## Get statistics about our lead sources
 
       One useful statistic we can get from our data is how many calls each
-      `LeadSource` has received.
-
-      We use the Django ORM's annotate feature to make a list containing each
-      `LeadSource` and a count of its `Lead`s.
-
-      We created a custom model manager so that we can easily access this data
-      in our views by calling `LeadSource.objects.get_leads_per_source()`. And
-      we used the same technique to create a `get_leads_per_city()` method for
-      the `Lead` model.
+      `LeadSource` has received. We use the Django ORM's annotate feature to make a list containing each
+      `LeadSource` and a count of its `Lead` models. We create a custom model manager 
+      so that we can easily access this data in our views.
 
       ---
 
@@ -245,26 +183,12 @@
     :markdown
       ## Visualize our statistics with Chart.js
 
-      To display our statistics on homepage, we added some pie charts using
-      [Chart.js](http://www.chartjs.org/). This JavaScript code configures those
-      charts.
+      Back on the home page, we fetch call tracking statistics 
+      [in JSON from the server](https://docs.djangoproject.com/en/1.8/ref/request-response/#jsonresponse-objects) 
+      using [jQuery](https://api.jquery.com/jquery.get/).
+      We display the stats in colorful pie charts we create with [Chart.js](http://www.chartjs.org/). 
 
       ![Call tracking charts](http://howtodocs.s3.amazonaws.com/call-tracking-charts.png)
-
-      We first use jQuery's `$.get()` to make AJAX calls to our server and
-      retrieve our data. We then loop over the data in each response and
-      add it to a new array, `chartData`, in the format Chart.js expects.
-
-      Then we just tell Chart.js to make new pie charts with our data
-      in some divs we created in our `index.html` template.
-
-      ---
-
-      **See also:**
-
-      * [Chart.js pie charts](http://www.chartjs.org/docs/#doughnut-pie-chart)
-      * [jQuery $.get() method](https://api.jquery.com/jquery.get/)
-      * [Django's JsonResponse](https://docs.djangoproject.com/en/1.8/ref/request-response/#jsonresponse-objects)
 
   .step(data-file='call_tracking/views.py', data-highlight='118-138')
     :markdown
@@ -272,21 +196,19 @@
 
       That's it! Our Django application is now ready to purchase new phone
       numbers, forward incoming calls, and record some statistics for our
-      business.
+      business. 
 
-      If you're a Python developer working with Twilio, you might enjoy these
-      other tutorials:
+      If you're a Python developer working with Twilio, you might also enjoy these
+      tutorials:
 
-      [**Click-to-call**](https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask)
-      (Flask)
+      [**Click-To-Call (Flask)**](https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask)
 
       Put a button on your web page that connects visitors to live support or sales people via telephone.
 
-      [**Appointment Reminders**](https://www.twilio.com/docs/howto/walkthrough/appointment-reminders/python/django)
-      (Django)
+      [**Appointment Reminders (Django)**](https://www.twilio.com/docs/howto/walkthrough/appointment-reminders/python/django)
 
       Send your customers automatic reminders ahead of appoiments using Twilio
-      SMS messaging.
+      SMS.
 
       Thanks for checking out this tutorial! If you have any feedback to share
       with us, we'd love to hear it. Tweet [@twilio](https://twitter.com/twilio)
