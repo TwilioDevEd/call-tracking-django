@@ -5,6 +5,8 @@
 
 Use Twilio to track the effectiveness of your different marketing campaigns. Learn how call tracking helps organizations in [these Twilio customer stories](https://www.twilio.com/use-cases/call-tracking).
 
+[Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/call-tracking/python/django)!
+
 ## Quickstart
 
 ### Create a TwiML App
