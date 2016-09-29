@@ -38,6 +38,22 @@ if not TWIML_APPLICATION_SID:
     """
     raise ImproperlyConfigured(missing_application_sid_message)
 
+TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID', None)
+if not TWILIO_ACCOUNT_SID:
+    missing_account_sid_message = \
+    """
+    You *must* set a TWILIO_ACCOUNT_SID environment variable to run this app.
+    """
+    raise ImproperlyConfigured(missing_account_sid_message)
+
+TWILIO_AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN', None)
+if not TWILIO_AUTH_TOKEN:
+    missing_auth_token_message = \
+    """
+    You *must* set a TWILIO_AUTH_TOKEN environment variable to run this app.
+    """
+    raise ImproperlyConfigured(missing_auth_token_message)
+
 # Application definition
 
 DJANGO_APPS = (

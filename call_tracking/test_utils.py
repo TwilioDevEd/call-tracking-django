@@ -16,28 +16,28 @@ class SearchPhoneNumbersTest(TestCase):
 
     def test_search_phone_numbers(self):
         # Act
-        with patch('twilio.rest.resources.phone_numbers.AvailablePhoneNumbers.list') as mock:
+        with patch('twilio.rest.api.v2010.account.available_phone_number.local.LocalList.list') as mock:
             search_phone_numbers()
 
         # Assert
         self.assertTrue(mock.called)
-        mock.assert_called_with(area_code=None, country='US')
+        mock.assert_called_with(area_code=None)
 
     def test_search_phone_numbers_with_area_code(self):
         # Act
-        with patch('twilio.rest.resources.phone_numbers.AvailablePhoneNumbers.list') as mock:
+        with patch('twilio.rest.api.v2010.account.available_phone_number.local.LocalList.list') as mock:
             search_phone_numbers(415)
 
         # Assert
         self.assertTrue(mock.called)
-        mock.assert_called_with(area_code=415, country='US')
+        mock.assert_called_with(area_code=415)
 
 
 class PurchasePhoneNumberTest(TestCase):
 
     def test_purchase_phone_number(self):
         # Act
-        with patch('twilio.rest.resources.phone_numbers.PhoneNumbers.purchase') as mock:
+        with patch('twilio.rest.api.v2010.account.incoming_phone_number.IncomingPhoneNumberList.create') as mock:
             purchase_phone_number(phone_number='+15555555555')
 
         # Assert
