@@ -9,7 +9,7 @@ django-forms-bootstrap==3.0.1
 django-phonenumber-field==0.7.2
 phonenumbers==7.0.8
 psycopg2==2.6.1
-twilio==6.0.0rc12
+twilio>=6.0.0rc13,<6.1.0
 whitenoise==2.0.2
 
 # Production dependencies
