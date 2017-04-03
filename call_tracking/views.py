@@ -7,7 +7,7 @@ from django.template.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import UpdateView
-from twilio import twiml
+from twilio.twiml.voice_response import VoiceResponse
 
 from .forms import AreaCodeForm, PurchaseNumberForm
 from .models import LeadSource, Lead
@@ -132,7 +132,7 @@ def forward_call(request):
     lead.save()
 
     # Respond with some TwiML that connects the caller to the forwarding_number
-    r = twiml.Response()
+    r = VoiceResponse()
     r.dial(source.forwarding_number.as_e164)
 
     return HttpResponse(r)
