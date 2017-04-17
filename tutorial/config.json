@@ -1,0 +1,6 @@
+{
+    "title": "Call Tracking",
+    "repo": "TwilioDevEd/call-tracking-django",
+    "description": "Use Twilio to track the effectiveness of your marketing campaigns. Let's get started!",
+    "heroku": true
+}
