@@ -23,18 +23,6 @@ Create a new TwiML app at https://www.twilio.com/user/account/apps/add and use i
 
 You can learn more about TwiML apps here: https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app
 
-### Heroku
-
-The easiest way to run this app is by deploying it to [Heroku](https://www.heroku.com/). You can run this app for free in minutes:
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/TwilioDevEd/call-tracking-django)
-
-After your app deploys, you will need to update your TwiML app to use the Heroku server's hostname in the TwiML app's voice URL field. It will look something like this:
-
-```
-http://young-journey-3547.herokuapp.com/call-tracking/forward-call
-```
-
 ### Local development
 
 This project is built using the [Django](https://www.djangoproject.com/) web framework. It runs on Python 2.7+ and Python 3.4+.
