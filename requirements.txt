@@ -14,7 +14,7 @@ whitenoise==2.0.2
 
 # Production dependencies
 dj-database-url==0.3.0
-gunicorn==19.3.0
+gunicorn==19.9.0
 
 # Test dependencies
 coverage==3.7.1
