@@ -10,7 +10,7 @@ django-phonenumber-field==0.7.2
 phonenumbers==7.0.8
 psycopg2==2.6.1
 twilio==6.9.0
-whitenoise==2.0.2
+whitenoise==5.1.0
 
 # Production dependencies
 dj-database-url==0.3.0
