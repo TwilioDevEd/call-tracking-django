@@ -4,7 +4,7 @@
 Django==1.8
 
 # Third-party app dependencies
-django-bootstrap3==6.1.0
+django-bootstrap3==15.0.0
 django-forms-bootstrap==3.0.1
 django-phonenumber-field==0.7.2
 phonenumbers==7.0.8
