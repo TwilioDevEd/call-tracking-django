@@ -4,7 +4,7 @@
 
 # Call Tracking (Django)
 
-[![Build Status](https://travis-ci.org/TwilioDevEd/call-tracking-django.svg?branch=master)](https://travis-ci.org/TwilioDevEd/call-tracking-django)
+[![Build and test](https://github.com/TwilioDevEd/call-tracking-django/actions/workflows/build_test.yml/badge.svg)](https://github.com/TwilioDevEd/call-tracking-django/actions/workflows/build_test.yml)
 [![Coverage Status](https://coveralls.io/repos/TwilioDevEd/call-tracking-django/badge.svg?branch=master&service=github)](https://coveralls.io/github/TwilioDevEd/call-tracking-django?branch=master)
 
 Use Twilio to track the effectiveness of your different marketing campaigns. Learn how call tracking helps organizations in [these Twilio customer stories](https://www.twilio.com/use-cases/call-tracking).
