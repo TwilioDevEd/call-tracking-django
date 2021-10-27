@@ -65,7 +65,7 @@ To run the app locally, first clone this repository and `cd` into its directory.
     python manage.py createsuperuser
     ```
 
-1. Copy the `.env_example` file to `.env`, and edit it to include your Twilio API credentials (found at https://www.twilio.com/user/account/voice)
+1. Copy the `.env.example` file to `.env`, and edit it to include your Twilio API credentials (found at https://www.twilio.com/user/account/voice)
 1. Run `source .env` to apply the environment variables (or even better, use [autoenv](https://github.com/kennethreitz/autoenv))
 1. Start the development server
 
@@ -80,7 +80,11 @@ Once you have started ngrok, update your TwiML app's voice URL setting to use yo
 ```
 http://88b37ada.ngrok.io/call-tracking/forward-call
 ```
+### Use Production Environment
 
+Follow previous guide and in step 6 do:
+
+1. Copy the `.env.prod.example` file to `.env`, and edit it to include your Twilio API credentials (found at https://www.twilio.com/user/account/voice)
 ## Run the tests
 
 You can run the tests locally through [coverage](http://coverage.readthedocs.org/):
