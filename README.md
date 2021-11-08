@@ -80,6 +80,8 @@ Once you have started ngrok, update your TwiML app's voice URL setting to use yo
 ```
 http://88b37ada.ngrok.io/call-tracking/forward-call
 ```
+
+*Note:* To enable debug logs in local environment, set the `DEBUG` variable to `True` in the `local.py` file
 ### Use Production Environment
 
 Follow previous guide and in step 6 do:
