@@ -1,12 +1,12 @@
-from django.conf.urls import include, url
+from django.urls import include, re_path
 from django.contrib import admin
 
 from call_tracking.views import home
 
 urlpatterns = [
-    url(r'^$', home, name='home'),
-    url(r'^call-tracking', include('call_tracking.urls')),
+    re_path(r'^$', home, name='home'),
+    re_path(r'^call-tracking/', include('call_tracking.urls')),
 
     # Include the Django admin
-    url(r'^admin/', include(admin.site.urls)),
+    re_path(r'^admin/', admin.site.urls),
 ]

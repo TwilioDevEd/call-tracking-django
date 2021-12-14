@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import Count
-from django.utils.encoding import python_2_unicode_compatible
+from six import python_2_unicode_compatible
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -60,7 +60,7 @@ class LeadManager(models.Manager):
 
 @python_2_unicode_compatible
 class Lead(models.Model):
-    source = models.ForeignKey(LeadSource)
+    source = models.ForeignKey(LeadSource, on_delete=models.CASCADE)
     phone_number = PhoneNumberField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
