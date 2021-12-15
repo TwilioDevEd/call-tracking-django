@@ -124,7 +124,7 @@ class PurchaseNumberTest(TestCase):
 
         # Assert
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.redirect_chain[0][0], 'http://testserver/')
+        self.assertEqual(response.redirect_chain[0][0], '/')
         self.assertIn(
             'bad-phone-number is not a valid phone number. Please search again.', str(response.content))
 
