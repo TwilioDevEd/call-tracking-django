@@ -1,4 +1,5 @@
 from django.test import TestCase, Client
+from django.urls import reverse
 from model_mommy import mommy
 
 import json
@@ -118,13 +119,16 @@ class PurchaseNumberTest(TestCase):
         self.assertIn('/edit', response.url)
 
     def test_purchase_number_bad_post_data(self):
+        # Arrange
+        expected_url = reverse('home')
+
         # Act
         response = self.client.post(
             '/call-tracking/purchase-number', {'phone_number': 'bad-phone-number'}, follow=True)
 
         # Assert
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.redirect_chain[0][0], '/')
+        self.assertEqual(response.redirect_chain[0][0], expected_url)
         self.assertIn(
             'bad-phone-number is not a valid phone number. Please search again.', str(response.content))
 
