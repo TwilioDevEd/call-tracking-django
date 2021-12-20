@@ -85,6 +85,7 @@ MIDDLEWARE = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 )
 
 ROOT_URLCONF = 'twilio_sample_project.urls'
@@ -140,6 +141,7 @@ STATIC_ROOT = BASE_DIR + '/staticfiles'
 
 STATIC_URL = '/static/'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Messages settings for Bootstrap 3
 
