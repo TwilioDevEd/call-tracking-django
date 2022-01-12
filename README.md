@@ -25,7 +25,7 @@ You can learn more about TwiML apps here: https://www.twilio.com/help/faq/twilio
 
 ### Local development
 
-This project is built using the [Django](https://www.djangoproject.com/) web framework. It runs on Python 2.7+ and Python 3.4+.
+This project is built using the [Django](https://www.djangoproject.com/) web framework. It runs on Python 3.6+, Python 3.7+.
 
 To run the app locally, first clone this repository and `cd` into its directory. Then:
 
@@ -67,6 +67,13 @@ To run the app locally, first clone this repository and `cd` into its directory.
 
 1. Copy the `.env.example` file to `.env`, and edit it to include your Twilio API credentials (found at https://www.twilio.com/user/account/voice)
 1. Run `source .env` to apply the environment variables (or even better, use [autoenv](https://github.com/kennethreitz/autoenv))
+
+1. Collect static files from each of your application
+
+    ```
+    python manage.py collectstatic
+    ```
+
 1. Start the development server
 
     ```
