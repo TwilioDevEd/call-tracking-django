@@ -25,7 +25,7 @@ You can learn more about TwiML apps here: https://www.twilio.com/help/faq/twilio
 
 ### Local development
 
-This project is built using the [Django](https://www.djangoproject.com/) web framework. It runs on Python 3.6+, Python 3.7+.
+This project is built using the [Django](https://www.djangoproject.com/) web framework. It runs on Python 3.6+.
 
 To run the app locally, first clone this repository and `cd` into its directory. Then:
 
