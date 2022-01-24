@@ -10,7 +10,8 @@ https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/
 import os
 
 from django.core.wsgi import get_wsgi_application
-from whitenoise.django import DjangoWhiteNoise
+from django.conf import settings
+from whitenoise import WhiteNoise
 
 # Use our production settings as our default settings, which is most secure
 os.environ.setdefault(
@@ -22,4 +23,4 @@ application = get_wsgi_application()
 
 # Use Whitenoise to serve static files
 # See: https://whitenoise.readthedocs.org/
-application = DjangoWhiteNoise(application)
+application = WhiteNoise(application, root=settings.STATIC_ROOT)

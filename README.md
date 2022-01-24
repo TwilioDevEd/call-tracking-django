@@ -23,9 +23,17 @@ Create a new TwiML app at https://www.twilio.com/user/account/apps/add and use i
 
 You can learn more about TwiML apps here: https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app
 
+### Twilio Account Settings
+
+| Config&nbsp;Value | Description                                                                                                                                                  |
+| :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Account&nbsp;Sid  | Your primary Twilio account identifier - find this [in the Console](https://www.twilio.com/console).                                                         |
+| Auth&nbsp;Token   | Used to authenticate - [just like the above, you'll find this here](https://www.twilio.com/console).                                                         |
+| TwiML app&nbsp;Sid | TwiML app SID created [here](https://www.twilio.com/user/account/apps/add) |
+
 ### Local development
 
-This project is built using the [Django](https://www.djangoproject.com/) web framework. It runs on Python 2.7+ and Python 3.4+.
+This project is built using the [Django](https://www.djangoproject.com/) web framework. It runs on Python 3.6+.
 
 To run the app locally, first clone this repository and `cd` into its directory. Then:
 
@@ -53,6 +61,10 @@ To run the app locally, first clone this repository and `cd` into its directory.
     - If on a Mac, I recommend [Postgres.app](http://postgresapp.com/). After install, open psql and run `CREATE DATABASE call_tracking;`
     - If Postgres is already installed locally, you can just run `createdb call_tracking` from a terminal
 
+1. Copy the `.env.example` file to `.env`, and edit it to include your Twilio API credentials (found at https://www.twilio.com/user/account/voice)
+
+1. Run `source .env` to apply the environment variables (or even better, use [autoenv](https://github.com/kennethreitz/autoenv))
+
 1. Run the migrations with:
 
     ```
@@ -65,8 +77,12 @@ To run the app locally, first clone this repository and `cd` into its directory.
     python manage.py createsuperuser
     ```
 
-1. Copy the `.env.example` file to `.env`, and edit it to include your Twilio API credentials (found at https://www.twilio.com/user/account/voice)
-1. Run `source .env` to apply the environment variables (or even better, use [autoenv](https://github.com/kennethreitz/autoenv))
+1. Collect static files from each of your application
+
+    ```
+    python manage.py collectstatic
+    ```
+
 1. Start the development server
 
     ```
