@@ -17,7 +17,7 @@ Use Twilio to track the effectiveness of your different marketing campaigns. Lea
 
 This project is configured to use a **TwiML App**, which allows us to easily set the voice URLs for all Twilio phone numbers we purchase in this app.
 
-Create a new TwiML app at https://www.twilio.com/user/account/apps/add and use its `Sid` as the `TWIML_APPLICATION_SID` environment variable wherever you run this app.
+Create a new TwiML app [in the Twilio Console](https://console.twilio.com/us1/develop/voice/manage/twiml-apps?frameUrl=%2Fconsole%2Fvoice%2Ftwiml%2Fapps%3Fx-target-region%3Dus1) and use its `Sid` as the `TWIML_APPLICATION_SID` environment variable wherever you run this app.
 
 Learn how to [create a TwiML app](https://support.twilio.com/hc/en-us/articles/223180928-How-Do-I-Create-a-TwiML-App-).
 
@@ -27,7 +27,7 @@ Learn how to [create a TwiML app](https://support.twilio.com/hc/en-us/articles/2
 | :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Account&nbsp;Sid  | Your primary Twilio account identifier - find this [in the Console](https://www.twilio.com/console).                                                         |
 | Auth&nbsp;Token   | Used to authenticate - [just like the above, you'll find this here](https://www.twilio.com/console).                                                         |
-| TwiML app&nbsp;Sid | TwiML app SID created [here](https://www.twilio.com/user/account/apps/add) |
+| TwiML app&nbsp;Sid | TwiML app SID can be found by clicking on your [TwiML App in the console](https://console.twilio.com/us1/develop/voice/manage/twiml-apps?frameUrl=%2Fconsole%2Fvoice%2Ftwiml%2Fapps%3Fx-target-region%3Dus1) |
 
 ### Local development
 
