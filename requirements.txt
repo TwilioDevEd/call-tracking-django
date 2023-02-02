@@ -1,7 +1,7 @@
 # Requirements for the Call Tracking sample Django project
 
 # Django (1.8 is a long-term support release)
-Django==3.2.0
+Django==3.2.17
 
 # Third-party app dependencies
 django-bootstrap3==21.1.0
